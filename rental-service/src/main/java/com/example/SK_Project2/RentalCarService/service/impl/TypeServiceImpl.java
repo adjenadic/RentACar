@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 @Transactional
 public class TypeServiceImpl implements TypeService {
-
     private TypeRepository typeRepository;
     private TypeMapper typeMapper;
 
@@ -39,11 +38,11 @@ public class TypeServiceImpl implements TypeService {
     public TypeDto findById(Long id) {
         return typeRepository.findById(id)
                 .map(typeMapper::typeToTypeDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with ID: %d does not exist.", id)));
     }
 
     @Override
-    public TypeDto add(TypeCreateDto typeCreateDto) {
+    public TypeDto addType(TypeCreateDto typeCreateDto) {
         Type type = typeMapper.typeCreateDtoToType(typeCreateDto);
         typeRepository.save(type);
 
@@ -51,18 +50,18 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteType(Long id) {
         Type type = typeRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with ID: %d does not exist.", id)));
 
         typeRepository.delete(type);
         return true;
     }
 
     @Override
-    public TypeDto update(TypeDto typeDto) {
+    public TypeDto updateType(TypeDto typeDto) {
         Type type = typeRepository.findById(typeDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", typeDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with ID: %d does not exist.", typeDto.getId())));
 
         type.setId(typeDto.getId());
         type.setName(typeDto.getName());

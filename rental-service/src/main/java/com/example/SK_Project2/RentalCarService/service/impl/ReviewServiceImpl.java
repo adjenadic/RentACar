@@ -36,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto findById(Long id) {
         return reviewRepository.findById(id)
                 .map(reviewMapper::reviewToReviewDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Review with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Review with ID: %d does not exist.", id)));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDto add(ReviewCreateDto reviewCreateDto) {
+    public ReviewDto addReview(ReviewCreateDto reviewCreateDto) {
         Review review = reviewMapper.reviewCrateDtoToReview(reviewCreateDto);
 
         reviewRepository.save(review);
@@ -60,9 +60,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteReview(Long id) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Review with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Review with ID: %d does not exist.", id)));
 
         reviewRepository.delete(review);
 
@@ -70,15 +70,15 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewDto update(ReviewDto reviewDto) {
+    public ReviewDto updateReview(ReviewDto reviewDto) {
         Review review = reviewRepository.findById(reviewDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Review with id: %d does not exists.", reviewDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Review with ID: %d does not exist.", reviewDto.getId())));
 
         review.setRate(reviewDto.getRate());
         review.setDescription(reviewDto.getDesc());
 
         Company company = companyRepository.findCompanyById(reviewDto.getCompanyId())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", reviewDto.getCompanyId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", reviewDto.getCompanyId())));
 
         review.setCompany(company);
 
@@ -92,7 +92,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewDto> filterReview = new ArrayList<>();
 
         Company company = companyRepository.findCompanyById(reviewFilterDto.getCompany_id())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", reviewFilterDto.getCompany_id())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", reviewFilterDto.getCompany_id())));
 
         List<Review> allReviews = reviewRepository.findAll();
 

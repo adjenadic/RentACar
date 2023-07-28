@@ -38,11 +38,11 @@ public class ModelServiceImpl implements ModelService {
     public ModelDto findById(Long id) {
         return modelRepository.findById(id)
                 .map(modelMapper::modelToModelDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exist.", id)));
     }
 
     @Override
-    public ModelDto add(ModelCreateDto modelCreateDto) {
+    public ModelDto addModel(ModelCreateDto modelCreateDto) {
         Model model = modelMapper.modelCreateDtoToModel(modelCreateDto);
         modelRepository.save(model);
 
@@ -50,18 +50,18 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteModel(Long id) {
         Model model = modelRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exist.", id)));
 
         modelRepository.delete(model);
         return true;
     }
 
     @Override
-    public ModelDto update(ModelDto modelDto) {
+    public ModelDto updateModel(ModelDto modelDto) {
         Model model = modelRepository.findById(modelDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exists.", modelDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exist.", modelDto.getId())));
 
         model.setId(modelDto.getId());
         model.setName(modelDto.getName());

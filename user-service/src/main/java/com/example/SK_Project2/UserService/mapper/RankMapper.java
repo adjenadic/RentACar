@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RankMapper {
-
-//    private UserStatusRepository userRepository;  ako ga stavis dodaj ga u konstruktor
-
     public RankMapper() {
     }
 

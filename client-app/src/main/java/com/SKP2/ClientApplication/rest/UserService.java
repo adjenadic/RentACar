@@ -354,7 +354,7 @@ public class UserService {
         RequestBody body = RequestBody.create(JSON, objectMapper.writeValueAsString(rankCreateDto));
 
         Request request = new Request.Builder()
-                .url(URL + "/users/admin/setRank")
+                .url(URL + "/users/admin/set-rank")
                 .addHeader("authorization", "Bearer " + token)
                 .post(body)
                 .build();

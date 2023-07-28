@@ -36,7 +36,7 @@ public class TypeController {
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<TypeDto> registerType(@RequestHeader("authorization") String authorization, @RequestBody TypeCreateDto typeCreateDto) {
+    public ResponseEntity<TypeDto> addType(@RequestHeader("authorization") String authorization, @RequestBody TypeCreateDto typeCreateDto) {
         return new ResponseEntity<>(typeService.add(typeCreateDto), HttpStatus.CREATED);
     }
 

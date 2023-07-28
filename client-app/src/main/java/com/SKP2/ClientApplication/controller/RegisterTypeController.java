@@ -34,7 +34,7 @@ public class RegisterTypeController implements ActionListener {
         btnRegister.addActionListener(event -> {
             try {
                 TypeCreateDto typeCreateDto = new TypeCreateDto(tfTypeName.getText());
-                TypeDto typeDto = MainFrame.getInstance().getRentalService().registerType(typeCreateDto);
+                TypeDto typeDto = MainFrame.getInstance().getRentalService().addType(typeCreateDto);
                 JOptionPane.showMessageDialog(null, "Type successfully registered.", "Operation successful", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (IOException ex) {

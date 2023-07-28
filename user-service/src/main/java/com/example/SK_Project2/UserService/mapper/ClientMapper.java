@@ -27,7 +27,7 @@ public class ClientMapper {
 
         clientDto.setId(user.getId());
         clientDto.setUsername(user.getUsername());
-        clientDto.setPassword(user.getPassword()); //dodao
+        clientDto.setPassword(user.getPassword()); dodao
         clientDto.setEmail(user.getEmail());
         clientDto.setPhone(user.getPhone());
         clientDto.setDayOfBirth(user.getDayOfBirth());
@@ -55,7 +55,7 @@ public class ClientMapper {
         user.setForbidden(false);
         user.setRole(roleRepository.findRoleByName("ROLE_CLIENT").get());
 
-        //get Rank and set Rank
+        get Rank and set Rank
         List<UserStatus> userStatusList = userStatusRepository.findAll();
         String rank = userStatusList.stream()
                 .filter(userStatus -> userStatus.getMaxTotalNumberOfRentCar() >= user.getRentCarTotalDuration()
@@ -67,7 +67,7 @@ public class ClientMapper {
         user.setRank(rank);
 
 
-        //Random string - link
+        Random string - link
         UUID uuidObj = UUID.randomUUID();
         String link = uuidObj.toString().replaceAll("_", "");
         user.setActivatedEmail(link);

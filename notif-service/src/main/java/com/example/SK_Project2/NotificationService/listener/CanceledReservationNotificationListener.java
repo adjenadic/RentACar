@@ -32,11 +32,8 @@ public class CanceledReservationNotificationListener {
     public void successfulReservationNotification(Message message) throws JMSException {
         CanceledReservationDto canceledReservationDto = messageHelper.getMessage(message, CanceledReservationDto.class);
 
-        System.out.println(canceledReservationDto);
-
         NotificationDto notificationDto = canceledReservationNotificationService.add(canceledReservationDto);
 
-        //send email
         Notification notification = notificationMapper.notificationDtoToNotification(notificationDto);
         emailService.sendSimpleMessage(notification);
     }

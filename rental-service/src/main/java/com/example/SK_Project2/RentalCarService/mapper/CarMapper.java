@@ -32,7 +32,6 @@ public class CarMapper {
         carDto.setTypeName(car.getType().getName());
         carDto.setCompanyName(car.getCompany().getName());
         carDto.setRentalDayPrice(car.getRentalDayPrice());
-//        carDto.setReserved(car.isReserved());
 
         return carDto;
     }
@@ -40,19 +39,16 @@ public class CarMapper {
     public Car carCreateDtoToCar(CarCreateDto carCreateDto) {
         Car car = new Car();
 
-        //setModel
         Model model = modelRepository.findModelById(carCreateDto.getModelId())
-                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exists.", carCreateDto.getModelId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Model with ID: %d does not exist.", carCreateDto.getModelId())));
         car.setModel(model);
 
-        //setType
         Type type = typeRepository.findTypeById(carCreateDto.getTypeId())
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", carCreateDto.getTypeId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with ID: %d does not exist.", carCreateDto.getTypeId())));
         car.setType(type);
 
-        //setCompany
         Company company = companyRepository.findCompanyById(carCreateDto.getCompanyId())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", carCreateDto.getCompanyId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", carCreateDto.getCompanyId())));
 
         car.setCompany(company);
 

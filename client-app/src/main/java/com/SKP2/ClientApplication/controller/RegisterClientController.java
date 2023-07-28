@@ -93,14 +93,12 @@ public class RegisterClientController implements ActionListener {
                 java.sql.Date birthDateToSqlDate = new java.sql.Date(birthDate.getTime());
                 ClientCreateDto clientCreateDto = new ClientCreateDto(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                         tfPhone.getText(), birthDateToSqlDate, tfFirstName.getText(), tfLastName.getText(), tfPassport.getText());
-                ClientDto clientDto = MainFrame.getInstance().getUserService().registerClient(clientCreateDto);
+                ClientDto clientDto = MainFrame.getInstance().getUserService().addClient(clientCreateDto);
                 JOptionPane.showMessageDialog(null, "Client successfully created!\nID: " + clientDto.getId() + "\nUsername: " + clientDto.getUsername() + "\nPassword: " + clientDto.getPassword()
                         + "\nEmail: " + clientDto.getEmail() + "\nDate of Birth: " + clientDto.getDayOfBirth() + "\nFirst name: " + clientDto.getFirstName() + "\nLast name: " + clientDto.getLastName()
                         + "\nPassport: " + clientDto.getPassport(), "Operation successful", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException | ParseException ex) {
-                throw new RuntimeException(ex);
-//                JOptionPane.showMessageDialog(null, "Client account not created!", "Operation unsuccessful", JOptionPane.ERROR_MESSAGE);
-            }
+                throw new RuntimeException(ex);}
         });
 
         jDialog.setVisible(true);

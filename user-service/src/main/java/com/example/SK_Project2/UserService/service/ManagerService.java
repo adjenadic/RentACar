@@ -11,13 +11,11 @@ public interface ManagerService {
 
     ManagerDto findById(Long id);
 
-    ManagerDto add(ManagerCreateDto managerCreateDto);
+    ManagerDto addManager(ManagerCreateDto managerCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteManager(Long id);
 
-    ManagerDto update(ManagerDto managerDto);
+    ManagerDto updateManager(ManagerDto managerDto);
 
     Boolean verificationEmail(String link);
-
-
 }

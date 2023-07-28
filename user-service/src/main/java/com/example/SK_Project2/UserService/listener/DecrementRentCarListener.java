@@ -23,7 +23,6 @@ public class DecrementRentCarListener {
     @JmsListener(destination = "${destination.decrementRentCar}", concurrency = "5-10")
     public void decrementRentCar(Message message) throws JMSException {
         DecrementRentCarDto decrementRentCarDto = messageHelper.getMessage(message, DecrementRentCarDto.class);
-        System.out.println(decrementRentCarDto);
         clientService.decrementRentCar(decrementRentCarDto.getId(), decrementRentCarDto.getDays());
     }
 

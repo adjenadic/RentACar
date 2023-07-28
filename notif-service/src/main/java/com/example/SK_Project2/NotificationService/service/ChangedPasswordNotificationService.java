@@ -5,6 +5,6 @@ import com.example.SK_Project2.NotificationService.dto.parametar.ChangedPassword
 
 public interface ChangedPasswordNotificationService {
 
-    NotificationDto add(ChangedPasswordDto changedPasswordDto); //zove listener ovu metodu
+    NotificationDto add(ChangedPasswordDto changedPasswordDto);
 
 }

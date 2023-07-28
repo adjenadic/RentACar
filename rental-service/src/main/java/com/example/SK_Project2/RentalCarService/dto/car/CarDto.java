@@ -3,15 +3,11 @@ package com.example.SK_Project2.RentalCarService.dto.car;
 import java.util.Date;
 
 public class CarDto {
-
     private Long id;
     private String modelName;
     private String typeName;
     private String companyName;
     private Integer rentalDayPrice;
-//    private boolean reserved;
-//    private Date startDate;
-//    private Date endDate;
 
     public CarDto() {
     }

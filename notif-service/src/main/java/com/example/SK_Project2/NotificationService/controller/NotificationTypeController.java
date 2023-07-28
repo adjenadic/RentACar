@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notifications/notificationType")
+@RequestMapping("/notifications/notification-type")
 public class NotificationTypeController {
-
     private NotificationTypeService notificationTypeService;
 
     public NotificationTypeController(NotificationTypeService notificationTypeService) {
         this.notificationTypeService = notificationTypeService;
     }
-
 
     @GetMapping
     @CheckSecurity(roles = {"ROLE_ADMIN"})

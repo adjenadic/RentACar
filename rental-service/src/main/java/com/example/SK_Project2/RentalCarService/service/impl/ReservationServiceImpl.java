@@ -34,7 +34,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
 @Service
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
@@ -44,14 +43,11 @@ public class ReservationServiceImpl implements ReservationService {
     private CarRepository carRepository;
     private JmsTemplate jmsTemplate;
     private MessageHelper messageHelper;
-    private RestTemplate userServiceRestTemplate; //za sinhronu
+    private RestTemplate userServiceRestTemplate;
     private String incrementRentCarDestination;
     private String decrementRentCarDestination;
     private String successfulReservationDestination;
     private String canceledReservationDestination;
-
-    // jos jedna notifikacija dest
-
 
     public ReservationServiceImpl(TokenService tokenService, ReservationRepository reservationRepository, ReservationMapper reservationMapper, CarRepository carRepository, JmsTemplate jmsTemplate, MessageHelper messageHelper, RestTemplate userServiceRestTemplate,
                                   @Value("${destination.incrementRentCar}") String incrementRentCarDestination, @Value("${destination.decrementRentCar}") String decrementRentCarDestination,
@@ -95,8 +91,9 @@ public class ReservationServiceImpl implements ReservationService {
             carRepository.save(car);
 
             //--------------------------------------------//
+
             Duration diff = Duration.between(newReservation.getStartDate().toInstant(), newReservation.getEndDate().toInstant());
-            Integer days = Math.toIntExact(diff.toDays()) + 1;  // + 1 mozda
+            Integer days = Math.toIntExact(diff.toDays()) + 1;
 
             IncrementRentCarDto incrementRentCarDto = new IncrementRentCarDto();
             incrementRentCarDto.setId(newReservation.getUserId());
@@ -105,23 +102,17 @@ public class ReservationServiceImpl implements ReservationService {
 
             //-------------------------------------------//
 
-            //sinhona komunikacija, ali sta znaci retry ?
             ResponseEntity<DiscountDto> discountDtoResponseEntity = userServiceRestTemplate.exchange("/users/client/" + clientId + "/discount",
                     HttpMethod.GET, null, DiscountDto.class);
 
             DiscountDto discountDto = discountDtoResponseEntity.getBody();
-            System.out.println("Pre " + discountDto.getDiscount());
 
             Double discount = Double.valueOf((days * car.getRentalDayPrice())) * Double.valueOf(discountDto.getDiscount() * 0.01);
             Double price = Double.valueOf((days * car.getRentalDayPrice())) - discount;
-            System.out.println("Popust:" + discount);
-            System.out.println("Cena sa popustom" + price);
 
-            newReservation.setTotalPrice(price.intValue()); //setuj cenu
-
+            newReservation.setTotalPrice(price.intValue());
 
             //-----------------------------------------------------------------//
-            //asinhrona komunikacija
 
             SuccessfulReservationDto successfulReservationDto = new SuccessfulReservationDto();
 
@@ -140,8 +131,6 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         //--------------------------------------------//
-        //AKO VEC postoji rezervacija za taj auto
-
 
         List<Reservation> reservations = new ArrayList<>();
         reservationRepository.findAll().forEach(oldReservation -> {
@@ -150,20 +139,17 @@ public class ReservationServiceImpl implements ReservationService {
             }
         });
 
-
         boolean check = true;
         for (Reservation oldReservation : reservations) {
             if (!((newReservation.getStartDate().before(oldReservation.getStartDate()) && newReservation.getEndDate().before(oldReservation.getStartDate()))
                     || (newReservation.getStartDate().after(oldReservation.getEndDate()) && newReservation.getEndDate().after(oldReservation.getEndDate())))) {
-                check = false;   //ako bilo koja stara rezervacija preklapa novu rezervaciju ne mozes da rezervises
+                check = false;
             }
         }
 
-        System.out.println("LISTA: " + reservations);
-        //ako moze da se uklopi nova rezervacija u termine sa starim
         if (check) {
             Duration diff = Duration.between(newReservation.getStartDate().toInstant(), newReservation.getEndDate().toInstant());
-            Integer days = Math.toIntExact(diff.toDays()) + 1;  // + 1 mozda
+            Integer days = Math.toIntExact(diff.toDays()) + 1;
 
             IncrementRentCarDto incrementRentCarDto = new IncrementRentCarDto();
             incrementRentCarDto.setId(newReservation.getUserId());
@@ -172,23 +158,16 @@ public class ReservationServiceImpl implements ReservationService {
 
             //-------------------------------------------//
 
-            //sinhona komunikacija, ali sta znaci retry ?
             ResponseEntity<DiscountDto> discountDtoResponseEntity = userServiceRestTemplate.exchange("/users/client/" + clientId + "/discount",
                     HttpMethod.GET, null, DiscountDto.class);
 
             DiscountDto discountDto = discountDtoResponseEntity.getBody();
-            System.out.println("Pre " + discountDto.getDiscount());
-
             Double discount = Double.valueOf((days * car.getRentalDayPrice())) * Double.valueOf(discountDto.getDiscount() * 0.01);
             Double price = Double.valueOf((days * car.getRentalDayPrice())) - discount;
-            System.out.println("Popust:" + discount);
-            System.out.println("Cena sa popustom" + price);
 
-            newReservation.setTotalPrice(price.intValue()); //setuj cenu
-
+            newReservation.setTotalPrice(price.intValue());
 
             //-----------------------------------------------------------------//
-            //asinhrona komunikacija
 
             SuccessfulReservationDto successfulReservationDto = new SuccessfulReservationDto();
 
@@ -210,17 +189,17 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Boolean canceleReservation(String authorization, Long id) {
+    public Boolean cancelReservation(String authorization, Long id) {
         Claims claims = tokenService.parseToken(authorization.split(" ")[1]);
         String roleName = claims.get("role", String.class);
         String emailCancel = claims.get("email", String.class);
 
         if (roleName.equals("ROLE_ADMIN")) {
-            new OperationNotAllowed(String.format("Role admin can not canc"));
+            new OperationNotAllowed(String.format("Administrators can not cancel reservations."));
         }
 
         Reservation reservation = reservationRepository.findById(id).
-                orElseThrow(() -> new NotFoundException(String.format("Reservation with id: %d does not exists.", id)));
+                orElseThrow(() -> new NotFoundException(String.format("Reservation with ID: %d does not exist.", id)));
 
 
         Long clientId = reservation.getUserId();
@@ -228,7 +207,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         //--------------------------------------------//
         Duration diff = Duration.between(reservation.getStartDate().toInstant(), reservation.getEndDate().toInstant());
-        Integer days = Math.toIntExact(diff.toDays()) + 1; // mozda + 1
+        Integer days = Math.toIntExact(diff.toDays()) + 1;
 
         DecrementRentCarDto decrementRentCarDto = new DecrementRentCarDto();
         decrementRentCarDto.setId(clientId);
@@ -245,7 +224,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         jmsTemplate.convertAndSend(canceledReservationDestination, messageHelper.createTextMessage(canceledReservationDto));
 
-        if (!emailCancel.equals(reservation.getEmail())) { //ako otkazuje manager posalji i njemu mejl
+        if (!emailCancel.equals(reservation.getEmail())) {
             CanceledReservationDto canceledReservationDto1 = new CanceledReservationDto();
 
             canceledReservationDto1.setEmail(emailCancel);
@@ -256,11 +235,8 @@ public class ReservationServiceImpl implements ReservationService {
 
         //-------------------------------------------//
 
-
         reservationRepository.delete(reservation);
 
-
-        //Refresujem vrednosti ako nema ni jedne rezervacije za ta kola
         List<Reservation> reservations = new ArrayList<>();
         reservationRepository.findAll().forEach(oldReservation -> {
             if (oldReservation.getCar().equals(car)) {

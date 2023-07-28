@@ -12,11 +12,9 @@ import org.springframework.stereotype.Component;
 public class ReviewMapper {
     private CompanyRepository companyRepository;
 
-
     public ReviewMapper(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
-
     public ReviewDto reviewToReviewDto(Review review) {
         ReviewDto reviewDto = new ReviewDto();
 
@@ -24,7 +22,6 @@ public class ReviewMapper {
         reviewDto.setCompanyId(review.getCompany().getId());
         reviewDto.setRate(review.getRate());
         reviewDto.setDesc(review.getDescription());
-
 
         return reviewDto;
     }
@@ -36,7 +33,7 @@ public class ReviewMapper {
         review.setDescription(reviewCreateDto.getDesc());
 
         Company company = companyRepository.findCompanyById(reviewCreateDto.getCompanyId())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", reviewCreateDto.getCompanyId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", reviewCreateDto.getCompanyId())));
 
         review.setCompany(company);
 

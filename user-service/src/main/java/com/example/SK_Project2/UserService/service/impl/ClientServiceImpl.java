@@ -67,11 +67,11 @@ public class ClientServiceImpl implements ClientService {
     public ClientDto findById(Long id) {
         return userRepository.findById(id)
                 .map(clientMapper::userToClientDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exist.", id)));
     }
 
     @Override
-    public ClientDto add(ClientCreateDto clientCreateDto) {
+    public ClientDto addClient(ClientCreateDto clientCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_CLIENT")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
 
@@ -91,18 +91,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteClient(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exist.", id)));
 
         userRepository.delete(user);
         return true;
     }
 
     @Override
-    public ClientDto update(ClientDto clientDto) {
+    public ClientDto updateClient(ClientDto clientDto) {
         User user = userRepository.findById(clientDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", clientDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exist.", clientDto.getId())));
 
         String oldPassword = "";
         Boolean check = false;
@@ -134,15 +134,12 @@ public class ClientServiceImpl implements ClientService {
         return clientMapper.userToClientDto(user);
     }
 
-    @Override // ovo zove onaj lisener a ne controller da znas
+    @Override
     public void incrementRentCar(Long id, Integer days) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exist.", id)));
 
-        //Set rentCarTotalDuration
         user.setRentCarTotalDuration(user.getRentCarTotalDuration() + days);
-
-        //Set new rank
         List<UserStatus> userStatusList = userStatusRepository.findAll();
         String rank = userStatusList.stream()
                 .filter(userStatus -> userStatus.getMaxTotalNumberOfRentCar() >= user.getRentCarTotalDuration()
@@ -157,9 +154,9 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void decrementRentCar(Long id, Integer days) { // ovo zove onaj lisener a ne controller da znas
+    public void decrementRentCar(Long id, Integer days) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exist.", id)));
 
         //Set rentCarTotalDuration
         user.setRentCarTotalDuration(user.getRentCarTotalDuration() - days);

@@ -26,7 +26,7 @@ public class ManagerMapper {
 
         managerDto.setId(user.getId());
         managerDto.setUsername(user.getUsername());
-        managerDto.setPassword(user.getPassword());//dodao
+        managerDto.setPassword(user.getPassword());dodao
         managerDto.setEmail(user.getEmail());
         managerDto.setPhone(user.getPhone());
         managerDto.setDayOfBirth(user.getDayOfBirth());
@@ -56,7 +56,6 @@ public class ManagerMapper {
         user.setRentCarTotalDuration(null);
         user.setRole(roleRepository.findRoleByName("ROLE_MANAGER").get());
 
-        //Random string - link
         UUID uuidObj = UUID.randomUUID();
         String link = uuidObj.toString().replaceAll("_", "");
         user.setActivatedEmail(link);

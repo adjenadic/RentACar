@@ -24,7 +24,6 @@ public class IncrementRentCarListener {
     public void incrementRentCar(Message message) throws JMSException {
 
         IncrementRentCarDto incrementRentCarDto = messageHelper.getMessage(message, IncrementRentCarDto.class);
-        System.out.println(incrementRentCarDto);
         clientService.incrementRentCar(incrementRentCarDto.getId(), incrementRentCarDto.getDays());
     }
 }

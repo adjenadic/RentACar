@@ -12,11 +12,11 @@ public interface ClientService {
 
     ClientDto findById(Long id);
 
-    ClientDto add(ClientCreateDto clientCreateDto);
+    ClientDto addClient(ClientCreateDto clientCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteClient(Long id);
 
-    ClientDto update(ClientDto clientDto);
+    ClientDto updateClient(ClientDto clientDto);
 
     void incrementRentCar(Long id, Integer days);
 
@@ -25,6 +25,4 @@ public interface ClientService {
     DiscountDto findDiscount(Long id);
 
     Boolean verificationEmail(String link);
-
-
 }

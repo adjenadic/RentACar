@@ -40,8 +40,6 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSimpleMessage(Notification notification) {
-
-        //Create email and save in DB
         Email email = new Email();
         email.setNotification(notification);
         email.setSubject(notification.getNotificationType().getName());
@@ -54,14 +52,11 @@ public class EmailServiceImpl implements EmailService {
 
         emailRepository.save(email);
 
-        //send email
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email.getEmailTo());
         message.setSubject(email.getSubject());
         message.setText(email.getContext());
         mailSender.send(message);
-
-
     }
 
     @Override
@@ -82,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
                     emailsList.add(emailMapper.emailToEmailDto(email));
                 }
             });
-        } else { // za klijenta
+        } else {
             emailRepository.findAll().forEach(email -> {
                 if (email.getEmailTo().equals(userEmail)) {
                     emailsList.add(emailMapper.emailToEmailDto(email));

@@ -11,9 +11,9 @@ public interface TypeService {
 
     TypeDto findById(Long id);
 
-    TypeDto add(TypeCreateDto typeCreateDto);
+    TypeDto addType(TypeCreateDto typeCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteType(Long id);
 
-    TypeDto update(TypeDto typeDto);
+    TypeDto updateType(TypeDto typeDto);
 }

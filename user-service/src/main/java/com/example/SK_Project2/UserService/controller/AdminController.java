@@ -40,7 +40,7 @@ public class AdminController {
     }
 
     //--------------------------
-    @PostMapping("/setRank")
+    @PostMapping("/set-rank")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<RankDto> addRank(@RequestHeader("authorization") String authorization, @RequestBody RankCreateDto rankCreateDto) {
         return new ResponseEntity<>(adminService.addUserStatusRank(rankCreateDto), HttpStatus.OK);

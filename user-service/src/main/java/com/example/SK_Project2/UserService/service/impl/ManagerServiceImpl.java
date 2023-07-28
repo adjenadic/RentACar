@@ -61,11 +61,11 @@ public class ManagerServiceImpl implements ManagerService {
     public ManagerDto findById(Long id) {
         return userRepository.findById(id)
                 .map(managerMapper::userToManagerDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Manager with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Manager with id: %d does not exist.", id)));
     }
 
     @Override
-    public ManagerDto add(ManagerCreateDto managerCreateDto) {
+    public ManagerDto addManager(ManagerCreateDto managerCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_MANAGER")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_MANAGER not found."));
         User manager = managerMapper.managerCreateDtoToUser(managerCreateDto);
@@ -84,18 +84,18 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteManager(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exist.", id)));
 
         userRepository.delete(user);
         return true;
     }
 
     @Override
-    public ManagerDto update(ManagerDto managerDto) {
+    public ManagerDto updateManager(ManagerDto managerDto) {
         User user = userRepository.findById(managerDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", managerDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exist.", managerDto.getId())));
 
         String oldPassword = "";
         Boolean check = false;

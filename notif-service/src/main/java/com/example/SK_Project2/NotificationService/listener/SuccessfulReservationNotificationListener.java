@@ -16,7 +16,6 @@ import javax.jms.Message;
 
 @Component
 public class SuccessfulReservationNotificationListener {
-
     private MessageHelper messageHelper;
     private SuccessfulReservationNotificationService successfulReservationNotificationService;
     private EmailService emailService;
@@ -33,11 +32,8 @@ public class SuccessfulReservationNotificationListener {
     public void successfulReservationNotification(Message message) throws JMSException {
         SuccessfulReservationDto successfulReservationDto = messageHelper.getMessage(message, SuccessfulReservationDto.class);
 
-        System.out.println(successfulReservationDto);
-
         NotificationDto notificationDto = successfulReservationNotificationService.add(successfulReservationDto);
 
-        //send email
         Notification notification = notificationMapper.notificationDtoToNotification(notificationDto);
         emailService.sendSimpleMessage(notification);
 

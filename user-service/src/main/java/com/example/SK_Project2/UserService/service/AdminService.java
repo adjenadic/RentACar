@@ -12,6 +12,5 @@ public interface AdminService {
 
     Boolean forbid(Long id);
 
-    RankDto addUserStatusRank(RankCreateDto rankCreateDto); //rankDto name od do ,  nema id
-
+    RankDto addUserStatusRank(RankCreateDto rankCreateDto);
 }

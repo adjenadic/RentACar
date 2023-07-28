@@ -58,7 +58,7 @@ public class RegisterCompanyController implements ActionListener {
         btnRegister.addActionListener(event -> {
             try {
                 CompanyCreateDto companyCreateDto = new CompanyCreateDto(tfCompanyName.getText(), tfDescription.getText(), Integer.parseInt(tfNumOfCars.getText()), tfCity.getText());
-                CompanyDto updatedCompanyDto = MainFrame.getInstance().getRentalService().registerCompany(companyCreateDto);
+                CompanyDto updatedCompanyDto = MainFrame.getInstance().getRentalService().addCompany(companyCreateDto);
                 JOptionPane.showMessageDialog(null, "Company successfully registered.\nID: " + updatedCompanyDto.getId() + "\nCompany name: " + updatedCompanyDto.getName() + "\nDescription: " + updatedCompanyDto.getDescription()
                         + "\nNum of Cars: " + updatedCompanyDto.getNumOfCars() + "\nCity: " + updatedCompanyDto.getCity(), "Operation successful", JOptionPane.INFORMATION_MESSAGE);
 

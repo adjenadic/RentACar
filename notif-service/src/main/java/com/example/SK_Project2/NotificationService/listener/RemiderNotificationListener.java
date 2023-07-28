@@ -20,7 +20,6 @@ public class RemiderNotificationListener {
     private EmailService emailService;
     private NotificationMapper notificationMapper;
 
-
     public RemiderNotificationListener(MessageHelper messageHelper, ReminderNotificationService reminderNotificationService, EmailService emailService, NotificationMapper notificationMapper) {
         this.messageHelper = messageHelper;
         this.reminderNotificationService = reminderNotificationService;
@@ -31,11 +30,9 @@ public class RemiderNotificationListener {
     @JmsListener(destination = "${destination.reminderReservation}", concurrency = "5-10")
     public void reminderEmailNotification(Message message) throws JMSException {
         ReminderDto reminderDto = messageHelper.getMessage(message, ReminderDto.class);
-        System.out.println(reminderDto);
 
         NotificationDto notificationDto = reminderNotificationService.add(reminderDto);
 
-        //send email
         Notification notification = notificationMapper.notificationDtoToNotification(notificationDto);
         emailService.sendSimpleMessage(notification);
 

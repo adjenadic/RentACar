@@ -11,9 +11,9 @@ public interface ModelService {
 
     ModelDto findById(Long id);
 
-    ModelDto add(ModelCreateDto modelCreateDto);
+    ModelDto addModel(ModelCreateDto modelCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteModel(Long id);
 
-    ModelDto update(ModelDto modelDto);
+    ModelDto updateModel(ModelDto modelDto);
 }

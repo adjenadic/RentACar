@@ -21,8 +21,7 @@ public class Email {
 
     private String emailTo;
 
-    private Date date; // String.valueOf(LocalDate.now());
-
+    private Date date;
 
     public Email() {
     }

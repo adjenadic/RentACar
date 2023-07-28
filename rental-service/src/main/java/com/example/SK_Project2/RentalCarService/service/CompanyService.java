@@ -12,11 +12,11 @@ public interface CompanyService {
 
     CompanyDto findById(Long id);
 
-    CompanyDto add(CompanyCreateDto companyCreateDto);
+    CompanyDto addCompany(CompanyCreateDto companyCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteCompany(Long id);
 
-    CompanyDto update(CompanyDto companyDto);
+    CompanyDto updateCompany(CompanyDto companyDto);
 
 
     List<CompanyDto> sortCompaniesByReview();

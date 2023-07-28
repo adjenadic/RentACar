@@ -102,7 +102,7 @@ public class RegisterManagerController implements ActionListener {
                 ManagerCreateDto managerCreateDto = new ManagerCreateDto(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                         tfPhone.getText(), birthDateToSqlDate, tfFirstName.getText(), tfLastName.getText(), tfCompanyName.getText(),
                         tfEmploymentDay.getText());
-                ManagerDto managerDto = MainFrame.getInstance().getUserService().registerManager(managerCreateDto);
+                ManagerDto managerDto = MainFrame.getInstance().getUserService().addManager(managerCreateDto);
                 JOptionPane.showMessageDialog(null, "Manager successfully created!\nID: " + managerDto.getId() + "\nUsername: " + managerDto.getUsername() + "\nPassword: " + managerDto.getPassword()
                         + "\nEmail: " + managerDto.getEmail() + "\nDate of Birth: " + managerDto.getDayOfBirth() + "\nFirst name: " + managerDto.getFirstName() + "\nLast name: " + managerDto.getLastName()
                         + "\nCompany Name: " + managerDto.getCompanyName() + "\nEmployment Day: " + managerDto.getEmploymentDay(), "Operation successful", JOptionPane.INFORMATION_MESSAGE);

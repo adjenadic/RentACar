@@ -13,7 +13,7 @@ public class ManagerCreateDto {
     private String email;
     @NotBlank
     private String phone;
-    @NotBlank  // da li moze @DateTimeFormat  iako mi je dayOfBirth tipa string
+    @NotBlank
     private String dayOfBirth;
     @NotBlank
     private String firstName;

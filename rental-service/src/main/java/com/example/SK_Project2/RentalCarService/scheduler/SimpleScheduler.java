@@ -39,7 +39,7 @@ public class SimpleScheduler {
         reservationRepository.findAll().forEach(reservation -> {
 
             Duration diff = Duration.between(reservation.getStartDate().toInstant(), now.toInstant());
-            Integer days = Math.toIntExact(diff.toDays()) + 1;  // + 1 mozda
+            Integer days = Math.toIntExact(diff.toDays()) + 1;
 
             if (days <= 3 && reservation.getThreeDaysReminder().equals("NOT_SEND")) {
                 reservations.add(reservation);
@@ -47,7 +47,6 @@ public class SimpleScheduler {
         });
 
         for (Reservation reservation : reservations) {
-            //kreiram taj dto koj cu da saljem
             ReminderDto reminderDto = new ReminderDto();
 
             reminderDto.setEmail(reservation.getEmail());

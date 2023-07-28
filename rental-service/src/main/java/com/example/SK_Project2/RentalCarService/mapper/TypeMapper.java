@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TypeMapper {
-
     public TypeDto typeToTypeDto(Type type) {
         TypeDto typeDto = new TypeDto();
 
@@ -16,7 +15,6 @@ public class TypeMapper {
 
         return typeDto;
     }
-
 
     public Type typeCreateDtoToType(TypeCreateDto typeCreateDto) {
         Type type = new Type();

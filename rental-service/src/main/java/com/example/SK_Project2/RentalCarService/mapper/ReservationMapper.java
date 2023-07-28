@@ -21,7 +21,7 @@ public class ReservationMapper {
         ReservationDto reservationDto = new ReservationDto();
 
         Car car = carRepository.findById(reservation.getCar().getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exists.", reservation.getCar().getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Car with ID: %d does not exist.", reservation.getCar().getId())));
 
         reservationDto.setId(reservation.getId());
         reservationDto.setUserId(reservation.getUserId());
@@ -38,16 +38,14 @@ public class ReservationMapper {
     public Reservation reservationCreateDtoToReservation(ReservationCreateDto reservationCreateDto) {
         Reservation reservation = new Reservation();
 
-
         Car car = carRepository.findById(reservationCreateDto.getCarId())
-                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exists.", reservationCreateDto.getCarId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Car with ID: %d does not exist.", reservationCreateDto.getCarId())));
 
-        //user id cu setovati liniju nakon sto pozovem ovu metodu
         reservation.setCar(car);
         reservation.setStartDate(reservationCreateDto.getStartDate());
         reservation.setEndDate(reservationCreateDto.getEndDate());
-        reservation.setTotalPrice(0); //setujem cenu svakako posle
-        reservation.setEmail(null); // setuje email prilikom kreiranja rezervacije
+        reservation.setTotalPrice(0);
+        reservation.setEmail(null);
         reservation.setThreeDaysReminder("NOT_SEND");
 
         return reservation;

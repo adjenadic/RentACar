@@ -4,10 +4,7 @@ import com.example.SK_Project2.RentalCarService.dto.reservation.ReservationCreat
 import com.example.SK_Project2.RentalCarService.dto.reservation.ReservationDto;
 
 public interface ReservationService {
-
     ReservationDto addReservation(String authorization, ReservationCreateDto reservationCreateDto);
 
-    Boolean canceleReservation(String authorization, Long id);
-
-
+    Boolean cancelReservation(String authorization, Long id);
 }

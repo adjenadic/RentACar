@@ -67,7 +67,7 @@ public class NotificationService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/notifications/notificationType")
+                .url(URL + "/notifications/notification-type")
                 .addHeader("authorization", "Bearer " + token)
                 .get()
                 .build();
@@ -88,7 +88,7 @@ public class NotificationService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/notifications/notificationType/" + id)
+                .url(URL + "/notifications/notification-type/" + id)
                 .addHeader("authorization", "Bearer " + token)
                 .get()
                 .build();
@@ -108,7 +108,7 @@ public class NotificationService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/notifications/notificationType/registration")
+                .url(URL + "/notifications/notification-type/registration")
                 .addHeader("authorization", "Bearer " + token)
                 .post(body)
                 .build();
@@ -127,7 +127,7 @@ public class NotificationService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/notifications/notificationType/" + id)
+                .url(URL + "/notifications/notification-type/" + id)
                 .addHeader("authorization", "Bearer " + token)
                 .delete()
                 .build();
@@ -146,7 +146,7 @@ public class NotificationService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/notifications/notificationType")
+                .url(URL + "/notifications/notification-type")
                 .addHeader("authorization", "Bearer " + token)
                 .put(body)
                 .build();

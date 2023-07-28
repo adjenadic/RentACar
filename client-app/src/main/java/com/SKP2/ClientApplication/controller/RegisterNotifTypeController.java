@@ -34,7 +34,7 @@ public class RegisterNotifTypeController implements ActionListener {
         btnAdd.addActionListener(event -> {
             try {
                 NotificationTypeCreateDto notificationTypeCreateDto = new NotificationTypeCreateDto(tfName.getText());
-                NotificationTypeDto notificationTypeDto = MainFrame.getInstance().getNotificationService().registerNotificationType(notificationTypeCreateDto);
+                NotificationTypeDto notificationTypeDto = MainFrame.getInstance().getNotificationService().addNotificationType(notificationTypeCreateDto);
                 JOptionPane.showMessageDialog(null, "Notification type successfully added.", "Operation successful", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (IOException ex) {

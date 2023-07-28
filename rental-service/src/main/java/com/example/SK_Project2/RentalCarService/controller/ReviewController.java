@@ -33,7 +33,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.findById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/filterReview")
+    @PutMapping("/filter-review")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
     public ResponseEntity<List<ReviewDto>> filterReview(@RequestHeader("authorization") String authorization, @RequestBody ReviewFilterDto reviewFilterDto) {
         return new ResponseEntity<>(reviewService.filterReview(reviewFilterDto), HttpStatus.OK);
@@ -42,7 +42,7 @@ public class ReviewController {
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<ReviewDto> add(@RequestHeader("authorization") String authorization, @RequestBody ReviewCreateDto reviewCreateDto) {
+    public ResponseEntity<ReviewDto> addReview(@RequestHeader("authorization") String authorization, @RequestBody ReviewCreateDto reviewCreateDto) {
         return new ResponseEntity<>(reviewService.add(reviewCreateDto), HttpStatus.OK);
     }
 
@@ -50,7 +50,7 @@ public class ReviewController {
 
     @DeleteMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<Boolean> delete(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+    public ResponseEntity<Boolean> deleteReview(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
         return new ResponseEntity<>(reviewService.delete(id), HttpStatus.OK);
     }
 
@@ -58,7 +58,7 @@ public class ReviewController {
 
     @PutMapping
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<ReviewDto> update(@RequestHeader("authorization") String authorization, @RequestBody ReviewDto reviewDto) {
+    public ResponseEntity<ReviewDto> updateReview(@RequestHeader("authorization") String authorization, @RequestBody ReviewDto reviewDto) {
         return new ResponseEntity<>(reviewService.update(reviewDto), HttpStatus.OK);
     }
 }

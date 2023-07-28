@@ -8,14 +8,14 @@ import java.util.Date;
 import java.util.List;
 
 public interface CarService {
-    //manager ovo koristi
-    CarDto add(CarCreateDto carCreateDto);
+    CarDto addCar(CarCreateDto carCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteCar(Long id);
 
-    CarDto update(CarDto carDto);
+    CarDto updateCar(CarDto carDto);
 
     //------------------//
+
     List<CarDto> findAll();
 
     CarDto findById(Long id);

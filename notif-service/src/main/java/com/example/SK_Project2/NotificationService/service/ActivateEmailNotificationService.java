@@ -5,7 +5,6 @@ import com.example.SK_Project2.NotificationService.dto.notification.Notification
 import com.example.SK_Project2.NotificationService.dto.parametar.ActivateEmailDto;
 
 public interface ActivateEmailNotificationService {
-
-    NotificationDto add(ActivateEmailDto activateEmailDto); //zove listener ovu metodu
+    NotificationDto add(ActivateEmailDto activateEmailDto);
 
 }

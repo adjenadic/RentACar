@@ -33,12 +33,12 @@ public class CarController {
         return new ResponseEntity<>(carService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/sortASC")
+    @GetMapping("/sort-asc")
     public ResponseEntity<List<CarDto>> sortASC() {
         return new ResponseEntity<>(carService.sortByDayPriceASC(), HttpStatus.OK);
     }
 
-    @GetMapping("/sortDESC")
+    @GetMapping("/sort-desc")
     public ResponseEntity<List<CarDto>> sortDESC() {
         return new ResponseEntity<>(carService.sortByDayPriceDESC(), HttpStatus.OK);
     }
@@ -52,7 +52,7 @@ public class CarController {
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<CarDto> registerCar(@RequestHeader("authorization") String authorization, @RequestBody CarCreateDto carCreateDto) {
+    public ResponseEntity<CarDto> addCar(@RequestHeader("authorization") String authorization, @RequestBody CarCreateDto carCreateDto) {
         return new ResponseEntity<>(carService.add(carCreateDto), HttpStatus.CREATED);
     }
 

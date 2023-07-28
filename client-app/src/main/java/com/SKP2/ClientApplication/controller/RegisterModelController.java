@@ -34,7 +34,7 @@ public class RegisterModelController implements ActionListener {
         btnRegister.addActionListener(event -> {
             try {
                 ModelCreateDto modelCreateDto = new ModelCreateDto(tfModelName.getText());
-                ModelDto modelDto = MainFrame.getInstance().getRentalService().registerModel(modelCreateDto);
+                ModelDto modelDto = MainFrame.getInstance().getRentalService().addModel(modelCreateDto);
                 JOptionPane.showMessageDialog(null, "Model successfully registered.", "Operation successful", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (IOException ex) {

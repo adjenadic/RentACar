@@ -7,7 +7,6 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @Configuration
 public class UserServiceClientConfiguration {
-
     @Bean
     public RestTemplate userServiceRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
@@ -15,5 +14,4 @@ public class UserServiceClientConfiguration {
 
         return restTemplate;
     }
-
 }

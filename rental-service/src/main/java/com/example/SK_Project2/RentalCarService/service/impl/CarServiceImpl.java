@@ -18,7 +18,6 @@ import java.util.*;
 @Service
 @Transactional
 public class CarServiceImpl implements CarService {
-
     private ModelRepository modelRepository;
     private TypeRepository typeRepository;
     private CompanyRepository companyRepository;
@@ -45,10 +44,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarDto add(CarCreateDto carCreateDto) {
+    public CarDto addCar(CarCreateDto carCreateDto) {
         Long companyId = carCreateDto.getCompanyId();
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", companyId)));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exist.", companyId)));
         CompanyDto companyDto = companyMapper.companyToCompanyDto(company);
 
         if (company.getNumOfCars() >= companyDto.getCarList().size() + 1) {
@@ -63,34 +62,31 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteCar(Long id) {
         Car car = carRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exist.", id)));
 
         carRepository.delete(car);
         return true;
     }
 
     @Override
-    public CarDto update(CarDto carDto) {
+    public CarDto updateCar(CarDto carDto) {
         Car car = carRepository.findById(carDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exists.", carDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exist.", carDto.getId())));
 
         car.setId(carDto.getId());
 
-        //setModel
         Model model = modelRepository.findModelByName(carDto.getModelName())
-                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exists.", carDto.getModelName())));
+                .orElseThrow(() -> new NotFoundException(String.format("Model with id: %d does not exist.", carDto.getModelName())));
         car.setModel(model);
 
-        //setType
         Type type = typeRepository.findTypeByName(carDto.getTypeName())
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", carDto.getTypeName())));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exist.", carDto.getTypeName())));
         car.setType(type);
 
-        //setCompany
         Company company = companyRepository.findCompanyByName(carDto.getCompanyName())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", carDto.getCompanyName())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exist.", carDto.getCompanyName())));
 
         car.setCompany(company);
 
@@ -99,9 +95,7 @@ public class CarServiceImpl implements CarService {
         carRepository.save(car);
 
         return carMapper.carToCarDto(car);
-
     }
-
 
     @Override
     public List<CarDto> findAll() {
@@ -118,7 +112,7 @@ public class CarServiceImpl implements CarService {
     public CarDto findById(Long id) {
         return carRepository.findById(id)
                 .map(carMapper::carToCarDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Car with id: %d does not exist.", id)));
     }
 
     @Override
@@ -126,7 +120,7 @@ public class CarServiceImpl implements CarService {
         List<CarDto> availableCars = new ArrayList<>();
 
         Company company = companyRepository.findCompanyById(carFilterDto.getCompany_id())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", carFilterDto.getCompany_id())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exist.", carFilterDto.getCompany_id())));
 
         List<Car> allCars = carRepository.findAll();
 
@@ -160,7 +154,6 @@ public class CarServiceImpl implements CarService {
 
         return availableCars;
     }
-
 
     //-----------------------------------------------------------//
 

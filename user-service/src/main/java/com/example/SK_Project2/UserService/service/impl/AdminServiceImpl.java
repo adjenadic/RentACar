@@ -48,13 +48,13 @@ public class AdminServiceImpl implements AdminService {
     public AdminDto findById(Long id) {
         return userRepository.findById(id)
                 .map(adminMapper::userToAdminDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Admin with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Admin with ID: %d does not exist.", id)));
     }
 
     @Override
     public AdminDto update(AdminDto adminDto) {
         User user = userRepository.findById(adminDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", adminDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("User with ID: %d does not exist.", adminDto.getId())));
 
 
         String oldPassword = "";
@@ -90,7 +90,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Boolean forbid(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("User with ID: %d does not exist.", id)));
 
         user.setForbidden(true);
 

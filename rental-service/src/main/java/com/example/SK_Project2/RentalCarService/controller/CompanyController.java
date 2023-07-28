@@ -32,7 +32,7 @@ public class CompanyController {
         return new ResponseEntity<>(companyService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/sortCompanies")
+    @GetMapping("/sort-companies")
     public ResponseEntity<List<CompanyDto>> sortCompaniesByRate() {
         return new ResponseEntity<>(companyService.sortCompaniesByReview(), HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class CompanyController {
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<CompanyDto> registerCompany(@RequestHeader("authorization") String authorization, @RequestBody CompanyCreateDto companyCreateDto) {
+    public ResponseEntity<CompanyDto> addCompany(@RequestHeader("authorization") String authorization, @RequestBody CompanyCreateDto companyCreateDto) {
         return new ResponseEntity<>(companyService.add(companyCreateDto), HttpStatus.CREATED);
     }
 

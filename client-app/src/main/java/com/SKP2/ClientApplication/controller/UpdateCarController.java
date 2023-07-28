@@ -60,32 +60,12 @@ public class UpdateCarController implements ActionListener {
         tfRentalDayPrice.setBounds(40, 340, 250, 30);
         jDialog.add(tfRentalDayPrice);
 
-//        JLabel lblStartDate = new JLabel("Start date");
-//        lblStartDate.setBounds(40, 370, 250, 30);
-//        jDialog.add(lblStartDate);
-//
-//        JTextField tfStartDate = new JTextField();
-//        tfStartDate.setBounds(40, 400, 250, 30);
-//        jDialog.add(tfStartDate);
-//
-//        JLabel lblEndDate = new JLabel("End date");
-//        lblEndDate.setBounds(40, 430, 250, 30);
-//        jDialog.add(lblEndDate);
-//
-//        JTextField tfEndDate = new JTextField();
-//        tfEndDate.setBounds(40, 460, 250, 30);
-//        jDialog.add(tfEndDate);
-
         JButton btnUpdate = new JButton("Update");
         btnUpdate.setBounds(40, 490, 250, 30);
         jDialog.add(btnUpdate);
         btnUpdate.addActionListener(event -> {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                Date startDate = sdf.parse(tfStartDate.getText());
-//                java.sql.Date startDateToSqlDate = new java.sql.Date(startDate.getTime());
-//                Date endDate = sdf.parse(tfEndDate.getText());
-//                java.sql.Date endDateToSqlDate = new java.sql.Date(startDate.getTime());
                 CarDto carDto = new CarDto(Long.parseLong(tfID.getText()), tfModelName.getText(), tfTypeName.getText(), tfCompanyName.getText(), Integer.parseInt(tfRentalDayPrice.getText()));
                 CarDto updatedCarDto = MainFrame.getInstance().getRentalService().updateCar(carDto);
                 JOptionPane.showMessageDialog(null, "Car successfully updated.\nID: " + updatedCarDto.getId() + "\nModel name: " + updatedCarDto.getModelName() + "\nType name: " + updatedCarDto.getTypeName()

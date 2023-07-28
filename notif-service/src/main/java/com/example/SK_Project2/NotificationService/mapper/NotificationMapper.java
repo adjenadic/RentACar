@@ -35,12 +35,11 @@ public class NotificationMapper {
 
         parametarRepository.save(notification.getParametar());
 
-        //SetTekst
         String firstName = notification.getParametar().getFirstName();
         String lastName = notification.getParametar().getLastName();
         String link = notification.getParametar().getLink();
 
-        notification.setText("Pozdrav " + firstName + " " + lastName + " , verifikujte email na sledecem linku " + link);
+        notification.setText("Hello, " + firstName + " " + lastName + " , verify your email using the following:\n" + link);
 
         return notification;
     }
@@ -51,15 +50,12 @@ public class NotificationMapper {
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("CHANGED_PASSWORD").get());
         notification.setParametar(parametarMapper.changedPasswordDtoToParametar(changedPasswordDto));
 
-
         parametarRepository.save(notification.getParametar());
 
-
-        //SetTekst
         String oldPassword = notification.getParametar().getOldPassword();
         String newPassword = notification.getParametar().getNewPassword();
 
-        notification.setText("Lozinka je promenjena, stara lozinka:" + oldPassword + " , nova lozinka:" + newPassword);
+        notification.setText("Password has been successfully changed.\nOld password: " + oldPassword + "\nNew password:" + newPassword);
 
         return notification;
     }
@@ -71,16 +67,14 @@ public class NotificationMapper {
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("SUCCESSFUL_RESERVATION").get());
         notification.setParametar(parametarMapper.successfulReservationDtoToParametar(successfulReservationDto));
 
-
         parametarRepository.save(notification.getParametar());
 
-        //Set tekst
         String car = notification.getParametar().getCar();
         String price = notification.getParametar().getPrice();
         Date startDate = notification.getParametar().getStartDate();
         Date endDate = notification.getParametar().getEndDate();
-        notification.setText("Uspesna rezervacija automobila '" + car + "'. " +
-                "Ukupna cena iznosi: '" + price + ", u periodu od " + startDate + " do " + endDate);
+        notification.setText("Reservation successful: '" + car + "'. " +
+                "\nTotal price: '" + price + "\nDuration:" + startDate + " do " + endDate);
 
         return notification;
     }
@@ -93,10 +87,9 @@ public class NotificationMapper {
 
         parametarRepository.save(notification.getParametar());
 
-        //Set tekst
         String car = notification.getParametar().getCar();
 
-        notification.setText("Uspesna otkazana rezervacija automobila '" + car + "'");
+        notification.setText("Reservation cancelled: '" + car + "'");
 
         return notification;
 
@@ -110,8 +103,7 @@ public class NotificationMapper {
 
         parametarRepository.save(notification.getParametar());
 
-        //Set text
-        notification.setText("Uskoro mozete da pokupite rezervaciju za automobil  " + notification.getParametar().getCar());
+        notification.setText("Reservation available for pickup: " + notification.getParametar().getCar());
 
         return notification;
     }
@@ -129,7 +121,7 @@ public class NotificationMapper {
 
     public Notification notificationDtoToNotification(NotificationDto notificationDto) {
         Notification notification = notificationRepository.findNotificationById(notificationDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Notification with id: %d does not exists.", notificationDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Notification with ID %d does not exist.", notificationDto.getId())));
 
         return notification;
     }

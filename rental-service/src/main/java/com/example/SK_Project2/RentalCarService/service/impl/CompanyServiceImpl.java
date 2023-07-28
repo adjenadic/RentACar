@@ -41,11 +41,11 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyDto findById(Long id) {
         return companyRepository.findById(id)
                 .map(companyMapper::companyToCompanyDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", id)));
     }
 
     @Override
-    public CompanyDto add(CompanyCreateDto companyCreateDto) {
+    public CompanyDto addCompany(CompanyCreateDto companyCreateDto) {
         Company company = companyMapper.companyCreateDtoToCompany(companyCreateDto);
 
         companyRepository.save(company);
@@ -54,9 +54,9 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public Boolean deleteCompany(Long id) {
         Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", id)));
 
         companyRepository.delete(company);
 
@@ -64,9 +64,9 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto update(CompanyDto companyDto) {
+    public CompanyDto updateCompany(CompanyDto companyDto) {
         Company company = companyRepository.findById(companyDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", companyDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", companyDto.getId())));
 
         company.setId(companyDto.getId());
         company.setName(companyDto.getName());
@@ -100,11 +100,10 @@ public class CompanyServiceImpl implements CompanyService {
         }
         Map<Double, Long> treeMap = new TreeMap<>(Collections.reverseOrder());
         treeMap.putAll(mapa);
-        System.out.println(mapa);
 
         treeMap.forEach((k, v) ->
                 companies.add(companyRepository.findById(v).map(companyMapper::companyToCompanyDto)
-                        .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", v)))));
+                        .orElseThrow(() -> new NotFoundException(String.format("Company with ID: %d does not exist.", v)))));
 
         return companies;
     }

@@ -32,11 +32,9 @@ public class ActivateEmailNotificationListener {
     @JmsListener(destination = "${destination.activateEmail}", concurrency = "5-10")
     public void activateEmailNotification(Message message) throws JMSException {
         ActivateEmailDto activateEmailDto = messageHelper.getMessage(message, ActivateEmailDto.class);
-        System.out.println(activateEmailDto);
 
         NotificationDto notificationDto = activateEmailNotificationService.add(activateEmailDto);
 
-        //send email
         Notification notification = notificationMapper.notificationDtoToNotification(notificationDto);
         emailService.sendSimpleMessage(notification);
 

@@ -4,7 +4,6 @@ import com.example.SK_Project2.NotificationService.dto.notification.Notification
 import com.example.SK_Project2.NotificationService.dto.parametar.ReminderDto;
 
 public interface ReminderNotificationService {
-
-    NotificationDto add(ReminderDto reminderDto); // zove listener ovu metodu
+    NotificationDto add(ReminderDto reminderDto);
 
 }

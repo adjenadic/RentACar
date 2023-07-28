@@ -5,5 +5,5 @@ import com.example.SK_Project2.NotificationService.dto.parametar.SuccessfulReser
 
 public interface SuccessfulReservationNotificationService {
 
-    NotificationDto add(SuccessfulReservationDto successfulReservationDto); // zove listener ovu metodu
+    NotificationDto add(SuccessfulReservationDto successfulReservationDto);
 }

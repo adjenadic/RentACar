@@ -29,7 +29,7 @@ public class NotificationTypeServiceImpl implements NotificationTypeService {
     public NotificationTypeDto findById(Long id) {
         return notificationTypeRepository.findById(id)
                 .map(notificationTypeMapper::notificationTypeToNotificationTypeDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with ID: %d does not exist.", id)));
 
     }
 
@@ -56,7 +56,7 @@ public class NotificationTypeServiceImpl implements NotificationTypeService {
     @Override
     public Boolean delete(Long id) {
         NotificationType notificationType = notificationTypeRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with ID: %d does not exist.", id)));
 
         notificationTypeRepository.delete(notificationType);
         return true;
@@ -65,7 +65,7 @@ public class NotificationTypeServiceImpl implements NotificationTypeService {
     @Override
     public NotificationTypeDto update(NotificationTypeDto notificationTypeDto) {
         NotificationType notificationType = notificationTypeRepository.findById(notificationTypeDto.getId())
-                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with id: %d does not exists.", notificationTypeDto.getId())));
+                .orElseThrow(() -> new NotFoundException(String.format("Notification Type with ID: %d does not exist.", notificationTypeDto.getId())));
 
         notificationType.setId(notificationTypeDto.getId());
         notificationType.setName(notificationTypeDto.getName());

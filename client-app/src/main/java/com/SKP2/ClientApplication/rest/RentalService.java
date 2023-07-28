@@ -63,7 +63,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/car/sortASC")
+                .url(URL + "/rental/car/sort-asc")
                 .addHeader("authorization", "Bearer " + token)
                 .get()
                 .build();
@@ -84,7 +84,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/car/sortDESC")
+                .url(URL + "/rental/car/sort-desc")
                 .addHeader("authorization", "Bearer " + token)
                 .get()
                 .build();
@@ -226,7 +226,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/company/sortCompanies")
+                .url(URL + "/rental/company/sort-companies")
                 .addHeader("authorization", "Bearer " + token)
                 .get()
                 .build();
@@ -385,7 +385,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/model/")
+                .url(URL + "/rental/model")
                 .addHeader("authorization", "Bearer " + token)
                 .put(body)
                 .build();
@@ -406,7 +406,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/reservation/")
+                .url(URL + "/rental/reservation")
                 .addHeader("authorization", "Bearer " + token)
                 .post(body)
                 .build();
@@ -487,7 +487,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/review/filterReview")
+                .url(URL + "/rental/review/filter-review")
                 .addHeader("authorization", "Bearer " + token)
                 .put(body)
                 .build();
@@ -503,7 +503,7 @@ public class RentalService {
         throw new IOException();
     }
 
-    public ReviewDto add(ReviewCreateDto reviewCreateDto) throws IOException {
+    public ReviewDto addReview(ReviewCreateDto reviewCreateDto) throws IOException {
         RequestBody body = RequestBody.create(JSON, objectMapper.writeValueAsString(reviewCreateDto));
         String token = MainFrame.getInstance().getToken();
 
@@ -524,7 +524,7 @@ public class RentalService {
         throw new IOException();
     }
 
-    public Boolean delete(Long id) throws IOException {
+    public Boolean deleteReview(Long id) throws IOException {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
@@ -542,7 +542,7 @@ public class RentalService {
         throw new IOException();
     }
 
-    public ReviewDto update(ReviewDto reviewDto) throws IOException {
+    public ReviewDto updateReview(ReviewDto reviewDto) throws IOException {
         RequestBody body = RequestBody.create(JSON, objectMapper.writeValueAsString(reviewDto));
         String token = MainFrame.getInstance().getToken();
 
@@ -648,7 +648,7 @@ public class RentalService {
         String token = MainFrame.getInstance().getToken();
 
         Request request = new Request.Builder()
-                .url(URL + "/rental/type/")
+                .url(URL + "/rental/type")
                 .addHeader("authorization", "Bearer " + token)
                 .put(body)
                 .build();

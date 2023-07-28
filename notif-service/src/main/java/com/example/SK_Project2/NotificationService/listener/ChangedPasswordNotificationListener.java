@@ -32,11 +32,9 @@ public class ChangedPasswordNotificationListener {
     @JmsListener(destination = "${destination.changedPassword}", concurrency = "5-10")
     public void changedPasswordNotification(Message message) throws JMSException {
         ChangedPasswordDto changedPasswordDto = messageHelper.getMessage(message, ChangedPasswordDto.class);
-        System.out.println(changedPasswordDto);
 
         NotificationDto notificationDto = changedPasswordNotificationService.add(changedPasswordDto);
 
-        //send email
         Notification notification = notificationMapper.notificationDtoToNotification(notificationDto);
         emailService.sendSimpleMessage(notification);
 

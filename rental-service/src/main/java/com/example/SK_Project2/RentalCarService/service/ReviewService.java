@@ -7,18 +7,17 @@ import com.example.SK_Project2.RentalCarService.dto.review.ReviewFilterDto;
 import java.util.List;
 
 public interface ReviewService {
-
     ReviewDto findById(Long id);
 
     List<ReviewDto> findAll();
 
-    ReviewDto add(ReviewCreateDto reviewCreateDto);
+    ReviewDto addReview(ReviewCreateDto reviewCreateDto);
 
-    Boolean delete(Long id);
+    Boolean deleteReview(Long id);
 
-    ReviewDto update(ReviewDto reviewDto);
+    ReviewDto updateReview(ReviewDto reviewDto);
 
     //--------------//
-    List<ReviewDto> filterReview(ReviewFilterDto reviewFilterDto);
 
+    List<ReviewDto> filterReview(ReviewFilterDto reviewFilterDto);
 }

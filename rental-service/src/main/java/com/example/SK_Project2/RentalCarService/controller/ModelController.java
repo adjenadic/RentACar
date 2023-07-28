@@ -36,7 +36,7 @@ public class ModelController {
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<ModelDto> registerModel(@RequestHeader("authorization") String authorization, @RequestBody ModelCreateDto modelCreateDto) {
+    public ResponseEntity<ModelDto> addModel(@RequestHeader("authorization") String authorization, @RequestBody ModelCreateDto modelCreateDto) {
         return new ResponseEntity<>(modelService.add(modelCreateDto), HttpStatus.CREATED);
     }
 

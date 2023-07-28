@@ -1,6 +1,5 @@
 package com.example.SK_Project2.RentalCarService.mapper;
 
-
 import com.example.SK_Project2.RentalCarService.domain.Company;
 import com.example.SK_Project2.RentalCarService.dto.car.CarDto;
 import com.example.SK_Project2.RentalCarService.dto.company.CompanyCreateDto;
@@ -14,7 +13,6 @@ import java.util.List;
 
 @Component
 public class CompanyMapper {
-
     private CompanyRepository companyRepository;
     private CarRepository carRepository;
     private CarMapper carMapper;
@@ -34,7 +32,6 @@ public class CompanyMapper {
         companyDto.setNumOfCars(company.getNumOfCars());
         companyDto.setCity(company.getCity());
 
-        //set carList
         List<CarDto> cars = new ArrayList<>();
         carRepository.findAll().
                 forEach(car -> {
@@ -57,6 +54,4 @@ public class CompanyMapper {
 
         return company;
     }
-
-
 }
