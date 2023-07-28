@@ -86,26 +86,26 @@ public class CompanyServiceImpl implements CompanyService {
         List<Review> reviews = reviewRepository.findAll();
         List<Company> allCompanies = companyRepository.findAll();
 
-        Map<Double,Long> mapa = new HashMap<>();
-        for(Company company : allCompanies){
+        Map<Double, Long> mapa = new HashMap<>();
+        for (Company company : allCompanies) {
             Double zbir = 0.0;
             int counter = 0;
-            for(Review review : reviews){
-                if(review.getCompany().equals(company)){
+            for (Review review : reviews) {
+                if (review.getCompany().equals(company)) {
                     zbir = zbir + review.getRate();
                     counter++;
                 }
             }
-            mapa.put(zbir/counter,company.getId());
+            mapa.put(zbir / counter, company.getId());
         }
-        Map<Double,Long> treeMap = new TreeMap<>(Collections.reverseOrder());
+        Map<Double, Long> treeMap = new TreeMap<>(Collections.reverseOrder());
         treeMap.putAll(mapa);
         System.out.println(mapa);
 
-       treeMap.forEach((k,v) ->
-        companies.add(companyRepository.findById(v).map(companyMapper::companyToCompanyDto)
-                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", v)))));
+        treeMap.forEach((k, v) ->
+                companies.add(companyRepository.findById(v).map(companyMapper::companyToCompanyDto)
+                        .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", v)))));
 
-        return  companies;
+        return companies;
     }
 }

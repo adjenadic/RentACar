@@ -22,37 +22,37 @@ public class ModelController {
 
     @GetMapping
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<List<ModelDto>> getAllModels(@RequestHeader("authorization") String authorization){
+    public ResponseEntity<List<ModelDto>> getAllModels(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(modelService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<ModelDto> getModelById(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id){
-        return new ResponseEntity<>(modelService.findById(id),HttpStatus.OK);
+    public ResponseEntity<ModelDto> getModelById(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(modelService.findById(id), HttpStatus.OK);
     }
 
     //---------------------
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<ModelDto> registerModel(@RequestHeader("authorization") String authorization, @RequestBody ModelCreateDto modelCreateDto){
-        return new ResponseEntity<>(modelService.add(modelCreateDto),HttpStatus.CREATED);
+    public ResponseEntity<ModelDto> registerModel(@RequestHeader("authorization") String authorization, @RequestBody ModelCreateDto modelCreateDto) {
+        return new ResponseEntity<>(modelService.add(modelCreateDto), HttpStatus.CREATED);
     }
 
     //---------------------
 
     @DeleteMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<Boolean> deleteModel(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id){
-        return new ResponseEntity<>(modelService.delete(id),HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteModel(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(modelService.delete(id), HttpStatus.OK);
     }
 
     //---------------------
 
     @PutMapping
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<ModelDto> updateModel(@RequestHeader("authorization") String authorization,@RequestBody ModelDto modelDto){
-        return new ResponseEntity<>(modelService.update(modelDto),HttpStatus.OK);
+    public ResponseEntity<ModelDto> updateModel(@RequestHeader("authorization") String authorization, @RequestBody ModelDto modelDto) {
+        return new ResponseEntity<>(modelService.update(modelDto), HttpStatus.OK);
     }
 }

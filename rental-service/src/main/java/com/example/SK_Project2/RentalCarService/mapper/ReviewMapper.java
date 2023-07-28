@@ -17,7 +17,7 @@ public class ReviewMapper {
         this.companyRepository = companyRepository;
     }
 
-    public ReviewDto reviewToReviewDto(Review review){
+    public ReviewDto reviewToReviewDto(Review review) {
         ReviewDto reviewDto = new ReviewDto();
 
         reviewDto.setId(review.getId());
@@ -26,10 +26,10 @@ public class ReviewMapper {
         reviewDto.setDesc(review.getDescription());
 
 
-        return  reviewDto;
+        return reviewDto;
     }
 
-    public Review reviewCrateDtoToReview(ReviewCreateDto reviewCreateDto){
+    public Review reviewCrateDtoToReview(ReviewCreateDto reviewCreateDto) {
         Review review = new Review();
 
         review.setRate(reviewCreateDto.getRate());

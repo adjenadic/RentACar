@@ -10,7 +10,8 @@ public class RankMapper {
 
 //    private UserStatusRepository userRepository;  ako ga stavis dodaj ga u konstruktor
 
-    public RankMapper() {}
+    public RankMapper() {
+    }
 
     public RankDto userStatusToRankDto(UserStatus userStatus) {
         RankDto rankDto = new RankDto();

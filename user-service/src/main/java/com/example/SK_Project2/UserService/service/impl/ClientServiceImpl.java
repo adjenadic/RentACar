@@ -39,8 +39,8 @@ public class ClientServiceImpl implements ClientService {
 
     public ClientServiceImpl(UserRepository userRepository, RoleRepository roleRepository, UserStatusRepository userStatusRepository,
                              ClientMapper clientMapper, JmsTemplate jmsTemplate, MessageHelper messageHelper,
-                             @Value("${destination.activateEmail}")String activateEmailDestination,
-                             @Value("${destination.changedPassword}")String changedPasswordDestination) {
+                             @Value("${destination.activateEmail}") String activateEmailDestination,
+                             @Value("${destination.changedPassword}") String changedPasswordDestination) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userStatusRepository = userStatusRepository;
@@ -86,7 +86,7 @@ public class ClientServiceImpl implements ClientService {
         activateEmailDto.setEmail(client.getEmail());
         activateEmailDto.setLink(client.getActivatedEmail());
 
-        jmsTemplate.convertAndSend(activateEmailDestination,messageHelper.createTextMessage(activateEmailDto));
+        jmsTemplate.convertAndSend(activateEmailDestination, messageHelper.createTextMessage(activateEmailDto));
         return clientMapper.userToClientDto(client);
     }
 
@@ -106,7 +106,7 @@ public class ClientServiceImpl implements ClientService {
 
         String oldPassword = "";
         Boolean check = false;
-        if(!(user.getPassword().equals(clientDto.getPassword()))){
+        if (!(user.getPassword().equals(clientDto.getPassword()))) {
             oldPassword = user.getPassword();
             check = true;
         }
@@ -122,7 +122,7 @@ public class ClientServiceImpl implements ClientService {
 
         userRepository.save(user);
 
-        if(check) {
+        if (check) {
             ChangedPasswordDto changedPasswordDto = new ChangedPasswordDto();
             changedPasswordDto.setOldPassword(oldPassword);
             changedPasswordDto.setNewPassword(clientDto.getPassword());

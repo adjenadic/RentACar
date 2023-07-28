@@ -27,7 +27,7 @@ public class NotificationTypeServiceImpl implements NotificationTypeService {
 
     @Override
     public NotificationTypeDto findById(Long id) {
-        return  notificationTypeRepository.findById(id)
+        return notificationTypeRepository.findById(id)
                 .map(notificationTypeMapper::notificationTypeToNotificationTypeDto)
                 .orElseThrow(() -> new NotFoundException(String.format("Notification Type with id: %d does not exists.", id)));
 
@@ -42,7 +42,7 @@ public class NotificationTypeServiceImpl implements NotificationTypeService {
                     notificationTypes.add(notificationTypeMapper.notificationTypeToNotificationTypeDto(notificationType));
                 });
 
-        return  notificationTypes;
+        return notificationTypes;
     }
 
     @Override

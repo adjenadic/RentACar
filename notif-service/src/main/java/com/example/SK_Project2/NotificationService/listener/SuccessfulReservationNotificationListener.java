@@ -31,7 +31,7 @@ public class SuccessfulReservationNotificationListener {
 
     @JmsListener(destination = "${destination.successfulReservation}", concurrency = "5-10")
     public void successfulReservationNotification(Message message) throws JMSException {
-        SuccessfulReservationDto successfulReservationDto = messageHelper.getMessage(message,SuccessfulReservationDto.class);
+        SuccessfulReservationDto successfulReservationDto = messageHelper.getMessage(message, SuccessfulReservationDto.class);
 
         System.out.println(successfulReservationDto);
 

@@ -51,7 +51,7 @@ public class CarServiceImpl implements CarService {
                 .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", companyId)));
         CompanyDto companyDto = companyMapper.companyToCompanyDto(company);
 
-        if(company.getNumOfCars() >= companyDto.getCarList().size() + 1) {
+        if (company.getNumOfCars() >= companyDto.getCarList().size() + 1) {
             Car car = carMapper.carCreateDtoToCar(carCreateDto);
 
             carRepository.save(car);
@@ -85,7 +85,7 @@ public class CarServiceImpl implements CarService {
 
         //setType
         Type type = typeRepository.findTypeByName(carDto.getTypeName())
-                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.",carDto.getTypeName())));
+                .orElseThrow(() -> new NotFoundException(String.format("Type with id: %d does not exists.", carDto.getTypeName())));
         car.setType(type);
 
         //setCompany
@@ -126,35 +126,35 @@ public class CarServiceImpl implements CarService {
         List<CarDto> availableCars = new ArrayList<>();
 
         Company company = companyRepository.findCompanyById(carFilterDto.getCompany_id())
-               .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", carFilterDto.getCompany_id())));
+                .orElseThrow(() -> new NotFoundException(String.format("Company with id: %d does not exists.", carFilterDto.getCompany_id())));
 
         List<Car> allCars = carRepository.findAll();
 
-        for(Car car : allCars){
-            if(!car.isReserved() && car.getCompany().equals(company) && car.getCompany().getCity().equals(carFilterDto.getCity())){
+        for (Car car : allCars) {
+            if (!car.isReserved() && car.getCompany().equals(company) && car.getCompany().getCity().equals(carFilterDto.getCity())) {
                 availableCars.add(carMapper.carToCarDto(car));
                 continue;
             }
 
-            if(car.isReserved() && car.getCompany().equals(company) && car.getCompany().getCity().equals(carFilterDto.getCity())){
+            if (car.isReserved() && car.getCompany().equals(company) && car.getCompany().getCity().equals(carFilterDto.getCity())) {
                 List<Reservation> allCarReservation = new ArrayList<>();
 
                 reservationRepository.findAll().forEach(reservation -> {
-                    if(reservation.getCar().equals(car))
+                    if (reservation.getCar().equals(car))
                         allCarReservation.add(reservation);
                 });
 
                 boolean check = true;
-               for(Reservation reservation : allCarReservation){
-                   if(!((carFilterDto.getStartDate().before(reservation.getStartDate()) && carFilterDto.getEndDate().before(reservation.getStartDate()))
-                           || (carFilterDto.getStartDate().after(reservation.getEndDate()) && carFilterDto.getEndDate().after(reservation.getEndDate())))){
-                       check = false;
-                   }
-               }
+                for (Reservation reservation : allCarReservation) {
+                    if (!((carFilterDto.getStartDate().before(reservation.getStartDate()) && carFilterDto.getEndDate().before(reservation.getStartDate()))
+                            || (carFilterDto.getStartDate().after(reservation.getEndDate()) && carFilterDto.getEndDate().after(reservation.getEndDate())))) {
+                        check = false;
+                    }
+                }
 
-               if(check){
-                   availableCars.add(carMapper.carToCarDto(car));
-               }
+                if (check) {
+                    availableCars.add(carMapper.carToCarDto(car));
+                }
             }
         }
 
@@ -170,7 +170,7 @@ public class CarServiceImpl implements CarService {
 
         carRepository.findAll()
                 .forEach(car -> {
-                    if(!car.isReserved()){
+                    if (!car.isReserved()) {
                         cars.add(carMapper.carToCarDto(car));
                     }
                 });
@@ -185,7 +185,7 @@ public class CarServiceImpl implements CarService {
 
         carRepository.findAll()
                 .forEach(car -> {
-                    if(!car.isReserved()){
+                    if (!car.isReserved()) {
                         cars.add(carMapper.carToCarDto(car));
                     }
                 });

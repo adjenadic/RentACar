@@ -12,7 +12,7 @@ public class NotificationTypeMapper {
     public NotificationTypeMapper() {
     }
 
-    public NotificationTypeDto notificationTypeToNotificationTypeDto(NotificationType notificationType){
+    public NotificationTypeDto notificationTypeToNotificationTypeDto(NotificationType notificationType) {
         NotificationTypeDto notificationTypeDto = new NotificationTypeDto();
 
         notificationTypeDto.setId(notificationType.getId());
@@ -21,7 +21,7 @@ public class NotificationTypeMapper {
         return notificationTypeDto;
     }
 
-    public NotificationType notificationTypeCreateDtoToNotificationType(NotificationTypeCreateDto notificationTypeCreateDto){
+    public NotificationType notificationTypeCreateDtoToNotificationType(NotificationTypeCreateDto notificationTypeCreateDto) {
         NotificationType notificationType = new NotificationType();
 
         notificationType.setName(notificationTypeCreateDto.getName());

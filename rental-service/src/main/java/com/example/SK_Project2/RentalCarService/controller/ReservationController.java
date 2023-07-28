@@ -21,14 +21,14 @@ public class ReservationController {
 
     @PostMapping
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<ReservationDto> addReservation(@RequestHeader("authorization") String authorization, @RequestBody ReservationCreateDto reservationCreateDto){
-        return new ResponseEntity<>(reservationService.addReservation(authorization,reservationCreateDto), HttpStatus.CREATED);
+    public ResponseEntity<ReservationDto> addReservation(@RequestHeader("authorization") String authorization, @RequestBody ReservationCreateDto reservationCreateDto) {
+        return new ResponseEntity<>(reservationService.addReservation(authorization, reservationCreateDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    @CheckSecurity(roles = {"ROLE_CLIENT","ROLE_MANAGER"})
-    public ResponseEntity<Boolean> cancelReservation(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id){
-        return new ResponseEntity<>(reservationService.canceleReservation(authorization,id),HttpStatus.OK);
+    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER"})
+    public ResponseEntity<Boolean> cancelReservation(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(reservationService.canceleReservation(authorization, id), HttpStatus.OK);
     }
 
 }

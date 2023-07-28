@@ -62,30 +62,29 @@ public class EmailServiceImpl implements EmailService {
         mailSender.send(message);
 
 
-
     }
 
     @Override
     public List<EmailDto> findAllEmails(String authorization) {
         Claims claims = tokenService.parseToken(authorization.split(" ")[1]);
-        String roleName = claims.get("role",String.class);
-        String userEmail = claims.get("email",String.class);
+        String roleName = claims.get("role", String.class);
+        String userEmail = claims.get("email", String.class);
 
         List<EmailDto> emailsList = new ArrayList<>();
 
-        if(roleName.equals("ROLE_ADMIN")){
+        if (roleName.equals("ROLE_ADMIN")) {
             emailRepository.findAll().forEach(email -> {
                 emailsList.add(emailMapper.emailToEmailDto(email));
             });
-        } else if(roleName.equals("ROLE_MANAGER")){
+        } else if (roleName.equals("ROLE_MANAGER")) {
             emailRepository.findAll().forEach(email -> {
-                if(email.getEmailTo().equals(userEmail)){
+                if (email.getEmailTo().equals(userEmail)) {
                     emailsList.add(emailMapper.emailToEmailDto(email));
                 }
             });
-        }else{ // za klijenta
+        } else { // za klijenta
             emailRepository.findAll().forEach(email -> {
-                if(email.getEmailTo().equals(userEmail)){
+                if (email.getEmailTo().equals(userEmail)) {
                     emailsList.add(emailMapper.emailToEmailDto(email));
                 }
             });
@@ -100,12 +99,12 @@ public class EmailServiceImpl implements EmailService {
 
         List<EmailDto> filterEmails = new ArrayList<>();
 
-        for(EmailDto emailDto : allEmails){
-                Date date = emailDto.getDate();
-                if(emailDto.getEmailTo().equals(filterEmailDto.getEmail()) && emailDto.getSubject().equals(filterEmailDto.getSubject())
-                        && filterEmailDto.getStartDate().before(date) && filterEmailDto.getEndDate().after(date)) {
-                    filterEmails.add(emailDto);
-                }
+        for (EmailDto emailDto : allEmails) {
+            Date date = emailDto.getDate();
+            if (emailDto.getEmailTo().equals(filterEmailDto.getEmail()) && emailDto.getSubject().equals(filterEmailDto.getSubject())
+                    && filterEmailDto.getStartDate().before(date) && filterEmailDto.getEndDate().after(date)) {
+                filterEmails.add(emailDto);
+            }
 
         }
 

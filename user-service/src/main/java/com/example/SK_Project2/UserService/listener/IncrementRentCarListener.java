@@ -5,6 +5,7 @@ import com.example.SK_Project2.UserService.messageHelper.MessageHelper;
 import com.example.SK_Project2.UserService.service.ClientService;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
 
@@ -20,9 +21,9 @@ public class IncrementRentCarListener {
     }
 
     @JmsListener(destination = "${destination.incrementRentCar}", concurrency = "5-10")
-    public void incrementRentCar(Message message) throws JMSException{
+    public void incrementRentCar(Message message) throws JMSException {
 
-        IncrementRentCarDto incrementRentCarDto = messageHelper.getMessage(message,IncrementRentCarDto.class);
+        IncrementRentCarDto incrementRentCarDto = messageHelper.getMessage(message, IncrementRentCarDto.class);
         System.out.println(incrementRentCarDto);
         clientService.incrementRentCar(incrementRentCarDto.getId(), incrementRentCarDto.getDays());
     }

@@ -22,42 +22,42 @@ public class CompanyController {
 
     @GetMapping
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<List<CompanyDto>> getAllCompanies(@RequestHeader("authorization") String authorization){
+    public ResponseEntity<List<CompanyDto>> getAllCompanies(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(companyService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<CompanyDto> getCompanyById(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id){
-        return new ResponseEntity<>(companyService.findById(id),HttpStatus.OK);
+    public ResponseEntity<CompanyDto> getCompanyById(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(companyService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/sortCompanies")
-    public ResponseEntity<List<CompanyDto>> sortCompaniesByRate(){
-        return new ResponseEntity<>(companyService.sortCompaniesByReview(),HttpStatus.OK);
+    public ResponseEntity<List<CompanyDto>> sortCompaniesByRate() {
+        return new ResponseEntity<>(companyService.sortCompaniesByReview(), HttpStatus.OK);
     }
 
     //---------------------
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<CompanyDto> registerCompany(@RequestHeader("authorization") String authorization, @RequestBody CompanyCreateDto companyCreateDto){
-        return new ResponseEntity<>(companyService.add(companyCreateDto),HttpStatus.CREATED);
+    public ResponseEntity<CompanyDto> registerCompany(@RequestHeader("authorization") String authorization, @RequestBody CompanyCreateDto companyCreateDto) {
+        return new ResponseEntity<>(companyService.add(companyCreateDto), HttpStatus.CREATED);
     }
 
     //---------------------
 
     @DeleteMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<Boolean> deleteCompany(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id){
-        return new ResponseEntity<>(companyService.delete(id),HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteCompany(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(companyService.delete(id), HttpStatus.OK);
     }
 
     //---------------------
 
     @PutMapping
     @CheckSecurity(roles = {"ROLE_MANAGER"})
-    public ResponseEntity<CompanyDto> updateCompany(@RequestHeader("authorization") String authorization,@RequestBody CompanyDto companyDto){
-        return new ResponseEntity<>(companyService.update(companyDto),HttpStatus.OK);
+    public ResponseEntity<CompanyDto> updateCompany(@RequestHeader("authorization") String authorization, @RequestBody CompanyDto companyDto) {
+        return new ResponseEntity<>(companyService.update(companyDto), HttpStatus.OK);
     }
 }

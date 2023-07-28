@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<AdminDto> getAdminById(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id){
+    public ResponseEntity<AdminDto> getAdminById(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
         return new ResponseEntity<>(adminService.findById(id), HttpStatus.OK);
     }
 
@@ -29,19 +29,20 @@ public class AdminController {
 
     @PutMapping
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<AdminDto> updateAdmin(@RequestHeader("authorization") String authorization,@RequestBody AdminDto adminDto) {
+    public ResponseEntity<AdminDto> updateAdmin(@RequestHeader("authorization") String authorization, @RequestBody AdminDto adminDto) {
         return new ResponseEntity<>(adminService.update(adminDto), HttpStatus.OK);
     }
 
     @GetMapping("/forbid/{id}")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<Boolean> forbid(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id) {
+    public ResponseEntity<Boolean> forbid(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
         return new ResponseEntity<>(adminService.forbid(id), HttpStatus.OK);
     }
+
     //--------------------------
     @PostMapping("/setRank")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<RankDto> addRank(@RequestHeader("authorization") String authorization,@RequestBody RankCreateDto rankCreateDto){
-        return new ResponseEntity<>(adminService.addUserStatusRank(rankCreateDto),HttpStatus.OK);
+    public ResponseEntity<RankDto> addRank(@RequestHeader("authorization") String authorization, @RequestBody RankCreateDto rankCreateDto) {
+        return new ResponseEntity<>(adminService.addUserStatusRank(rankCreateDto), HttpStatus.OK);
     }
 }

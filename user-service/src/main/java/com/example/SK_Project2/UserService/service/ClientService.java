@@ -15,21 +15,16 @@ public interface ClientService {
     ClientDto add(ClientCreateDto clientCreateDto);
 
     Boolean delete(Long id);
+
     ClientDto update(ClientDto clientDto);
 
     void incrementRentCar(Long id, Integer days);
 
     void decrementRentCar(Long id, Integer days);
+
     DiscountDto findDiscount(Long id);
 
     Boolean verificationEmail(String link);
-
-
-
-
-
-
-
 
 
 }

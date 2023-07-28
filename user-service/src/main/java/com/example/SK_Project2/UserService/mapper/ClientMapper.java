@@ -69,7 +69,7 @@ public class ClientMapper {
 
         //Random string - link
         UUID uuidObj = UUID.randomUUID();
-        String link = uuidObj.toString().replaceAll("_","");
+        String link = uuidObj.toString().replaceAll("_", "");
         user.setActivatedEmail(link);
 
         return user;

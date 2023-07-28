@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 
     public AdminServiceImpl(UserRepository userRepository, RoleRepository roleRepository, UserStatusRepository userStatusRepository,
                             AdminMapper adminMapper, RankMapper rankMapper, JmsTemplate jmsTemplate, MessageHelper messageHelper,
-                            @Value("${destination.changedPassword}")String changedPasswordDestination) {
+                            @Value("${destination.changedPassword}") String changedPasswordDestination) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userStatusRepository = userStatusRepository;
@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
     public AdminDto findById(Long id) {
         return userRepository.findById(id)
                 .map(adminMapper::userToAdminDto)
-                .orElseThrow(()-> new NotFoundException(String.format("Admin with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Admin with id: %d does not exists.", id)));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
 
         String oldPassword = "";
         Boolean check = false;
-        if(!(user.getPassword().equals(adminDto.getPassword()))){
+        if (!(user.getPassword().equals(adminDto.getPassword()))) {
             oldPassword = user.getPassword();
             check = true;
         }
@@ -76,7 +76,7 @@ public class AdminServiceImpl implements AdminService {
 
         userRepository.save(user);
 
-        if(check) {
+        if (check) {
             ChangedPasswordDto changedPasswordDto = new ChangedPasswordDto();
             changedPasswordDto.setOldPassword(oldPassword);
             changedPasswordDto.setNewPassword(adminDto.getPassword());

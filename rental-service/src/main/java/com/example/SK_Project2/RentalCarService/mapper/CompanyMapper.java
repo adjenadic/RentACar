@@ -25,7 +25,7 @@ public class CompanyMapper {
         this.carMapper = carMapper;
     }
 
-    public CompanyDto companyToCompanyDto (Company company) {
+    public CompanyDto companyToCompanyDto(Company company) {
         CompanyDto companyDto = new CompanyDto();
 
         companyDto.setId(company.getId());
@@ -38,7 +38,7 @@ public class CompanyMapper {
         List<CarDto> cars = new ArrayList<>();
         carRepository.findAll().
                 forEach(car -> {
-                    if(car.getCompany().getName().equals(company.getName())){
+                    if (car.getCompany().getName().equals(company.getName())) {
                         cars.add(carMapper.carToCarDto(car));
                     }
                 });
@@ -47,7 +47,7 @@ public class CompanyMapper {
         return companyDto;
     }
 
-    public Company companyCreateDtoToCompany (CompanyCreateDto companyCreateDto) {
+    public Company companyCreateDtoToCompany(CompanyCreateDto companyCreateDto) {
         Company company = new Company();
 
         company.setName(companyCreateDto.getName());

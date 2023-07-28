@@ -14,10 +14,10 @@ public interface ManagerService {
     ManagerDto add(ManagerCreateDto managerCreateDto);
 
     Boolean delete(Long id);
+
     ManagerDto update(ManagerDto managerDto);
 
     Boolean verificationEmail(String link);
-
 
 
 }

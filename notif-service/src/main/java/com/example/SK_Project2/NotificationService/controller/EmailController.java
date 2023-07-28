@@ -22,15 +22,15 @@ public class EmailController {
 
 
     @GetMapping
-    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_MANAGER","ROLE_CLIENT"})
-    public ResponseEntity<List<EmailDto>> getAllEmails(@RequestHeader("authorization") String authorization){
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_CLIENT"})
+    public ResponseEntity<List<EmailDto>> getAllEmails(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(emailService.findAllEmails(authorization), HttpStatus.OK);
     }
 
     @PutMapping("/filter")
-    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_MANAGER","ROLE_CLIENT"})
-    public ResponseEntity<List<EmailDto>> getFilterEmails(@RequestHeader("authorization") String authorization, @RequestBody FilterEmailDto filterEmailDto){
-        return new ResponseEntity<>(emailService.filterEmail(authorization,filterEmailDto),HttpStatus.OK);
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_CLIENT"})
+    public ResponseEntity<List<EmailDto>> getFilterEmails(@RequestHeader("authorization") String authorization, @RequestBody FilterEmailDto filterEmailDto) {
+        return new ResponseEntity<>(emailService.filterEmail(authorization, filterEmailDto), HttpStatus.OK);
     }
 
 

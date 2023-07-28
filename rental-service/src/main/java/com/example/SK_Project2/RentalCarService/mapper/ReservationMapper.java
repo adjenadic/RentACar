@@ -17,7 +17,7 @@ public class ReservationMapper {
         this.carRepository = carRepository;
     }
 
-    public ReservationDto resevationToReservationDto(Reservation reservation){
+    public ReservationDto resevationToReservationDto(Reservation reservation) {
         ReservationDto reservationDto = new ReservationDto();
 
         Car car = carRepository.findById(reservation.getCar().getId())
@@ -32,10 +32,10 @@ public class ReservationMapper {
         reservationDto.setTotalPrice(reservation.getTotalPrice());
         reservationDto.setEmail(reservation.getEmail());
 
-        return  reservationDto;
+        return reservationDto;
     }
 
-    public Reservation reservationCreateDtoToReservation(ReservationCreateDto reservationCreateDto){
+    public Reservation reservationCreateDtoToReservation(ReservationCreateDto reservationCreateDto) {
         Reservation reservation = new Reservation();
 
 
@@ -50,6 +50,6 @@ public class ReservationMapper {
         reservation.setEmail(null); // setuje email prilikom kreiranja rezervacije
         reservation.setThreeDaysReminder("NOT_SEND");
 
-        return  reservation;
+        return reservation;
     }
 }

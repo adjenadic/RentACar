@@ -10,7 +10,7 @@ public class ParametarMapper {
     public ParametarMapper() {
     }
 
-    public Parametar activateEmailDtoToParametar(ActivateEmailDto activateEmailDto){
+    public Parametar activateEmailDtoToParametar(ActivateEmailDto activateEmailDto) {
         Parametar parametar = new Parametar();
 
         parametar.setFirstName(activateEmailDto.getFirstName());
@@ -28,7 +28,7 @@ public class ParametarMapper {
         return parametar;
     }
 
-    public Parametar changedPasswordDtoToParametar(ChangedPasswordDto changedPasswordDto){
+    public Parametar changedPasswordDtoToParametar(ChangedPasswordDto changedPasswordDto) {
         Parametar parametar = new Parametar();
 
         parametar.setNewPassword(changedPasswordDto.getNewPassword());
@@ -46,7 +46,7 @@ public class ParametarMapper {
         return parametar;
     }
 
-    public Parametar successfulReservationDtoToParametar(SuccessfulReservationDto successfulReservationDto){
+    public Parametar successfulReservationDtoToParametar(SuccessfulReservationDto successfulReservationDto) {
         Parametar parametar = new Parametar();
 
         parametar.setEmail(successfulReservationDto.getEmail());
@@ -64,7 +64,7 @@ public class ParametarMapper {
         return parametar;
     }
 
-    public Parametar canceledReservationDtoToParametar(CanceledReservationDto canceledReservationDto){
+    public Parametar canceledReservationDtoToParametar(CanceledReservationDto canceledReservationDto) {
         Parametar parametar = new Parametar();
 
         parametar.setEmail(canceledReservationDto.getEmail());
@@ -82,7 +82,7 @@ public class ParametarMapper {
         return parametar;
     }
 
-    public Parametar remiderDtoToParametar(ReminderDto reminderDto){
+    public Parametar remiderDtoToParametar(ReminderDto reminderDto) {
         Parametar parametar = new Parametar();
 
         parametar.setEmail(reminderDto.getEmail());

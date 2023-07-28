@@ -11,7 +11,7 @@ public class EmailMapper {
     }
 
 
-    public EmailDto emailToEmailDto(Email email){
+    public EmailDto emailToEmailDto(Email email) {
         EmailDto emailDto = new EmailDto();
         emailDto.setSubject(email.getSubject());
         emailDto.setContext(email.getContext());

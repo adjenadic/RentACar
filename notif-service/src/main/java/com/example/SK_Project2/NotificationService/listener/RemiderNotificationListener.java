@@ -30,7 +30,7 @@ public class RemiderNotificationListener {
 
     @JmsListener(destination = "${destination.reminderReservation}", concurrency = "5-10")
     public void reminderEmailNotification(Message message) throws JMSException {
-        ReminderDto reminderDto = messageHelper.getMessage(message,ReminderDto.class);
+        ReminderDto reminderDto = messageHelper.getMessage(message, ReminderDto.class);
         System.out.println(reminderDto);
 
         NotificationDto notificationDto = reminderNotificationService.add(reminderDto);

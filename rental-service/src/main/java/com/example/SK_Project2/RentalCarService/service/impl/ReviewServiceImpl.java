@@ -96,8 +96,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<Review> allReviews = reviewRepository.findAll();
 
-        for (Review review : allReviews){
-            if (review.getCompany().equals(company) && review.getCompany().getCity().equals(reviewFilterDto.getCity())){
+        for (Review review : allReviews) {
+            if (review.getCompany().equals(company) && review.getCompany().getCity().equals(reviewFilterDto.getCity())) {
                 filterReview.add(reviewMapper.reviewToReviewDto(review));
             }
         }

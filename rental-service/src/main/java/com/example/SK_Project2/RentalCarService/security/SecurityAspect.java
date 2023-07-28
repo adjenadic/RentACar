@@ -55,7 +55,7 @@ public class SecurityAspect {
         }
 
         boolean forbidden = claims.get("forbidden", Boolean.class);
-        if(forbidden){
+        if (forbidden) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 

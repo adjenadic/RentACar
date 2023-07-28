@@ -4,7 +4,8 @@ public class IncrementRentCarDto {
     private Long id;
     private Integer days;
 
-    public IncrementRentCarDto() {}
+    public IncrementRentCarDto() {
+    }
 
     public IncrementRentCarDto(Long id, Integer days) {
         this.id = id;

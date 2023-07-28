@@ -27,7 +27,4 @@ public interface CarService {
     List<CarDto> sortByDayPriceDESC();
 
 
-
-
-
 }

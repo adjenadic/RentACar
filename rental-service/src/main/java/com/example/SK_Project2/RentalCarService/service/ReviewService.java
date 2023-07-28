@@ -16,7 +16,7 @@ public interface ReviewService {
 
     Boolean delete(Long id);
 
-    ReviewDto update (ReviewDto reviewDto);
+    ReviewDto update(ReviewDto reviewDto);
 
     //--------------//
     List<ReviewDto> filterReview(ReviewFilterDto reviewFilterDto);

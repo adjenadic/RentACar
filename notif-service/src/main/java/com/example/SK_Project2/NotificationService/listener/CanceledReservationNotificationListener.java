@@ -30,7 +30,7 @@ public class CanceledReservationNotificationListener {
 
     @JmsListener(destination = "${destination.canceledReservation}", concurrency = "5-10")
     public void successfulReservationNotification(Message message) throws JMSException {
-        CanceledReservationDto canceledReservationDto = messageHelper.getMessage(message,CanceledReservationDto.class);
+        CanceledReservationDto canceledReservationDto = messageHelper.getMessage(message, CanceledReservationDto.class);
 
         System.out.println(canceledReservationDto);
 

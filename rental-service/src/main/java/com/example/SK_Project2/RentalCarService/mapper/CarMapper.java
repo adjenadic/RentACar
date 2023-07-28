@@ -24,7 +24,7 @@ public class CarMapper {
         this.companyRepository = companyRepository;
     }
 
-    public CarDto carToCarDto(Car car){
+    public CarDto carToCarDto(Car car) {
         CarDto carDto = new CarDto();
 
         carDto.setId(car.getId());
@@ -37,7 +37,7 @@ public class CarMapper {
         return carDto;
     }
 
-    public Car carCreateDtoToCar(CarCreateDto carCreateDto){
+    public Car carCreateDtoToCar(CarCreateDto carCreateDto) {
         Car car = new Car();
 
         //setModel

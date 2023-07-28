@@ -24,33 +24,33 @@ public class ClientController {
 
     @GetMapping
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<List<ClientDto>> getAllClients(@RequestHeader("authorization") String authorization){
+    public ResponseEntity<List<ClientDto>> getAllClients(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(clientService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<ClientDto> getClientById(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id){
+    public ResponseEntity<ClientDto> getClientById(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
         return new ResponseEntity<>(clientService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/discount")
-    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id){
-        return new ResponseEntity<>(clientService.findDiscount(id),HttpStatus.OK);
+    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(clientService.findDiscount(id), HttpStatus.OK);
     }
     //---------------------
 
     @PostMapping("/registration")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<ClientDto> registerClient(@RequestHeader("authorization") String authorization,@RequestBody ClientCreateDto clientCreateDto) {
+    public ResponseEntity<ClientDto> registerClient(@RequestHeader("authorization") String authorization, @RequestBody ClientCreateDto clientCreateDto) {
         return new ResponseEntity<>(clientService.add(clientCreateDto), HttpStatus.CREATED);
     }
 
     //---------------------
 
     @DeleteMapping("/{id}")
-    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_CLIENT"})
-    public ResponseEntity<Boolean> deleteClient(@RequestHeader("authorization") String authorization,@PathVariable("id") Long id) {
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_CLIENT"})
+    public ResponseEntity<Boolean> deleteClient(@RequestHeader("authorization") String authorization, @PathVariable("id") Long id) {
         return new ResponseEntity<>(clientService.delete(id), HttpStatus.OK);
     }
 
@@ -58,14 +58,14 @@ public class ClientController {
     //---------------------
 
     @PutMapping
-    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_CLIENT"})
-    public ResponseEntity<ClientDto> updateClient(@RequestHeader("authorization") String authorization,@RequestBody ClientDto clientDto) {
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_CLIENT"})
+    public ResponseEntity<ClientDto> updateClient(@RequestHeader("authorization") String authorization, @RequestBody ClientDto clientDto) {
         return new ResponseEntity<>(clientService.update(clientDto), HttpStatus.OK);
     }
 
     @GetMapping("/registration/{link}")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<Boolean> verificationEmail(@RequestHeader("authorization") String authorization,@PathVariable("link") String link) {
+    public ResponseEntity<Boolean> verificationEmail(@RequestHeader("authorization") String authorization, @PathVariable("link") String link) {
         return new ResponseEntity<>(clientService.verificationEmail(link), HttpStatus.OK);
     }
 }

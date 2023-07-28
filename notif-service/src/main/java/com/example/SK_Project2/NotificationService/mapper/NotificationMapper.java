@@ -27,7 +27,7 @@ public class NotificationMapper {
         this.parametarRepository = parametarRepository;
     }
 
-    public Notification activateEmailDtoToNotification(ActivateEmailDto activateEmailDto){
+    public Notification activateEmailDtoToNotification(ActivateEmailDto activateEmailDto) {
         Notification notification = new Notification();
 
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("ACTIVATE_EMAIL").get());
@@ -45,7 +45,7 @@ public class NotificationMapper {
         return notification;
     }
 
-    public Notification changedPasswordDtoToNotification(ChangedPasswordDto changedPasswordDto){
+    public Notification changedPasswordDtoToNotification(ChangedPasswordDto changedPasswordDto) {
         Notification notification = new Notification();
 
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("CHANGED_PASSWORD").get());
@@ -59,13 +59,13 @@ public class NotificationMapper {
         String oldPassword = notification.getParametar().getOldPassword();
         String newPassword = notification.getParametar().getNewPassword();
 
-        notification.setText("Lozinka je promenjena, stara lozinka:" +  oldPassword + " , nova lozinka:" + newPassword);
+        notification.setText("Lozinka je promenjena, stara lozinka:" + oldPassword + " , nova lozinka:" + newPassword);
 
         return notification;
     }
 
 
-    public Notification successfulReservationDtoToNotification(SuccessfulReservationDto successfulReservationDto){
+    public Notification successfulReservationDtoToNotification(SuccessfulReservationDto successfulReservationDto) {
         Notification notification = new Notification();
 
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("SUCCESSFUL_RESERVATION").get());
@@ -79,13 +79,13 @@ public class NotificationMapper {
         String price = notification.getParametar().getPrice();
         Date startDate = notification.getParametar().getStartDate();
         Date endDate = notification.getParametar().getEndDate();
-        notification.setText("Uspesna rezervacija automobila '" + car +"'. " +
-                "Ukupna cena iznosi: '" + price +", u periodu od " + startDate + " do " + endDate);
+        notification.setText("Uspesna rezervacija automobila '" + car + "'. " +
+                "Ukupna cena iznosi: '" + price + ", u periodu od " + startDate + " do " + endDate);
 
         return notification;
     }
 
-    public Notification canceledReservationDtoToNotification(CanceledReservationDto canceledReservationDto){
+    public Notification canceledReservationDtoToNotification(CanceledReservationDto canceledReservationDto) {
         Notification notification = new Notification();
 
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("CANCELED_RESERVATION").get());
@@ -96,13 +96,13 @@ public class NotificationMapper {
         //Set tekst
         String car = notification.getParametar().getCar();
 
-        notification.setText("Uspesna otkazana rezervacija automobila '" + car +"'");
+        notification.setText("Uspesna otkazana rezervacija automobila '" + car + "'");
 
         return notification;
 
     }
 
-    public Notification reminderDtoToNotification(ReminderDto reminderDto){
+    public Notification reminderDtoToNotification(ReminderDto reminderDto) {
         Notification notification = new Notification();
 
         notification.setNotificationType(notificationTypeRepository.findNotificationTypeByName("REMINDER").get());
@@ -117,7 +117,7 @@ public class NotificationMapper {
     }
 
 
-    public NotificationDto  notificationToNotificationDto (Notification notification){
+    public NotificationDto notificationToNotificationDto(Notification notification) {
         NotificationDto notificationDto = new NotificationDto();
 
         notificationDto.setId(notification.getId());
@@ -127,7 +127,7 @@ public class NotificationMapper {
     }
 
 
-    public Notification notificationDtoToNotification(NotificationDto notificationDto){
+    public Notification notificationDtoToNotification(NotificationDto notificationDto) {
         Notification notification = notificationRepository.findNotificationById(notificationDto.getId())
                 .orElseThrow(() -> new NotFoundException(String.format("Notification with id: %d does not exists.", notificationDto.getId())));
 

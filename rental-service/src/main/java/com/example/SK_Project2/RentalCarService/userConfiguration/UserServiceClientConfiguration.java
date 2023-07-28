@@ -9,11 +9,11 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 public class UserServiceClientConfiguration {
 
     @Bean
-    public RestTemplate userServiceRestTemplate(){
+    public RestTemplate userServiceRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory("http://localhost:8080/api"));
 
-        return  restTemplate;
+        return restTemplate;
     }
 
 }

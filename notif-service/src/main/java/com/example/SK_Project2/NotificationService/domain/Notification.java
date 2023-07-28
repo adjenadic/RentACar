@@ -11,9 +11,9 @@ public class Notification {
     @OneToOne
     private NotificationType notificationType;
     @ManyToOne
-    private  Parametar parametar;
+    private Parametar parametar;
 
-    private  String text;
+    private String text;
 
     public Notification() {
     }

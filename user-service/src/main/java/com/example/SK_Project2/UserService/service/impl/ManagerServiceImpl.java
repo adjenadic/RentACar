@@ -34,8 +34,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     public ManagerServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
                               ManagerMapper managerMapper, JmsTemplate jmsTemplate, MessageHelper messageHelper,
-                              @Value("${destination.activateEmail}")String activateEmailDestination,
-                              @Value("${destination.changedPassword}")String changedPasswordDestination) {
+                              @Value("${destination.activateEmail}") String activateEmailDestination,
+                              @Value("${destination.changedPassword}") String changedPasswordDestination) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.managerMapper = managerMapper;
@@ -49,19 +49,19 @@ public class ManagerServiceImpl implements ManagerService {
     public List<ManagerDto> findAll() {
         List<ManagerDto> managers = new ArrayList<>();
         userRepository.findAll()
-                .forEach( user -> {
+                .forEach(user -> {
                             if (user.getRole().getName().equals("ROLE_MANAGER"))
                                 managers.add(managerMapper.userToManagerDto(user));
                         }
                 );
-        return  managers;
+        return managers;
     }
 
     @Override
     public ManagerDto findById(Long id) {
         return userRepository.findById(id)
                 .map(managerMapper::userToManagerDto)
-                .orElseThrow(()-> new NotFoundException(String.format("Manager with id: %d does not exists.", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Manager with id: %d does not exists.", id)));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class ManagerServiceImpl implements ManagerService {
         activateEmailDto.setEmail(manager.getEmail());
         activateEmailDto.setLink(manager.getActivatedEmail());
 
-        jmsTemplate.convertAndSend(activateEmailDestination,messageHelper.createTextMessage(activateEmailDto));
+        jmsTemplate.convertAndSend(activateEmailDestination, messageHelper.createTextMessage(activateEmailDto));
         return managerMapper.userToManagerDto(manager);
     }
 
@@ -99,7 +99,7 @@ public class ManagerServiceImpl implements ManagerService {
 
         String oldPassword = "";
         Boolean check = false;
-        if(!(user.getPassword().equals(managerDto.getPassword()))){
+        if (!(user.getPassword().equals(managerDto.getPassword()))) {
             oldPassword = user.getPassword();
             check = true;
         }
@@ -117,7 +117,7 @@ public class ManagerServiceImpl implements ManagerService {
 
         userRepository.save(user);
 
-        if(check) {
+        if (check) {
             ChangedPasswordDto changedPasswordDto = new ChangedPasswordDto();
             changedPasswordDto.setOldPassword(oldPassword);
             changedPasswordDto.setNewPassword(managerDto.getPassword());

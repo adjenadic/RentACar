@@ -36,16 +36,15 @@ public class LoginServiceImpl implements LoginService {
                                 tokenRequestDto.getPassword())));
 
 
-
-        if(user.isForbidden()){
-            return  new TokenResponseDto("Nemas dozvolu da pristupis app");
+        if (user.isForbidden()) {
+            return new TokenResponseDto("Nemas dozvolu da pristupis app");
         }
         //Create token payload
         Claims claims = Jwts.claims();
         claims.put("id", user.getId());
         claims.put("role", user.getRole().getName());
-        claims.put("email",user.getEmail());
-        claims.put("forbidden",user.isForbidden());
+        claims.put("email", user.getEmail());
+        claims.put("forbidden", user.isForbidden());
 
         //Generate token
         return new TokenResponseDto(tokenService.generate(claims));

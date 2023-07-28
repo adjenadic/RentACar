@@ -24,7 +24,6 @@ public class Parametar {
     private Date endDate;
 
 
-
     public Parametar() {
     }
 

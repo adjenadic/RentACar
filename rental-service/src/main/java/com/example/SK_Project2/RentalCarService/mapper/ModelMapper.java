@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ModelMapper {
 
-    public ModelDto modelToModelDto(Model model){
+    public ModelDto modelToModelDto(Model model) {
         ModelDto modelDto = new ModelDto();
 
         modelDto.setId(model.getId());
@@ -17,7 +17,7 @@ public class ModelMapper {
         return modelDto;
     }
 
-    public Model modelCreateDtoToModel(ModelCreateDto modelCreateDto){
+    public Model modelCreateDtoToModel(ModelCreateDto modelCreateDto) {
         Model model = new Model();
 
         model.setName(modelCreateDto.getName());
